@@ -1,0 +1,13 @@
+{% extends 'Ms2474AuthNetBundle::layout.html.twig' %}
+
+{% form_theme form 'Ms2474AuthNetBundle::form.html.twig' %}
+
+{% block ms2474_authnet_content %}
+<form action="{{ path('ms2474_authnet_cimprofile_post') }}" method="post" {{ form_enctype(form) }}>
+    {{ form_widget(form) }}
+
+    <p>
+        <button type="submit">Submit</button>
+    </p>
+</form>
+{% endblock ms2474_authnet_content %}
