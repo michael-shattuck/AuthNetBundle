@@ -5,6 +5,7 @@ namespace Ms2474\AuthNetBundle\Controller;
 use Symfony\Component\DependencyInjection\ContainerAware;
 use Ms2474\AuthNetBundle\Entity\CIMProfile;
 use Ms2474\AuthNetBundle\Form\CIM\CIMProfileIndividualType;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class CIMProfileController extends ContainerAware
 {
@@ -49,16 +50,25 @@ class CIMProfileController extends ContainerAware
             }
 
             $customerProfileId = $CIMManager->postCustomerProfile($customerProfile);
-            echo $customerProfileId;
-            die;
+
+            $CIMProfile = new CIMProfile();
+            $CIMProfile->setProfileId($customerProfileId);
+
+            $em = $this->container->get('doctrine')->getEntityManager();
+            $em->persist($CIMProfile);
+            $em->flush();
+
+            $uri = $this->container->get('router')->generate(
+                'ms2474_authnet_cimprofile_index'
+            );
+
+            return new RedirectResponse($uri);
         }
 
         if ($form->hasErrors() > 0) {
             $errors = $form->getErrors();
         }
 
-        var_dump($errors);
-        die;
         return $this->container->get('templating')->renderResponse(
             'Ms2474AuthNetBundle:CIMProfile:newIndividual.html.twig', array(
                 'form' => $form->createView(),

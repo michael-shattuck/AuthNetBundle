@@ -59,6 +59,6 @@ class AuthorizeNetDataTypeManager
 
     public function newSubscription()
     {
-        return new AuthorizeNetTransaction();
+        return new AuthorizeNet_Subscription();
     }
 }

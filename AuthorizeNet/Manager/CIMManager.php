@@ -52,11 +52,10 @@ class CIMManager
     public function postCustomerProfile(DataType\AuthorizeNetCustomer $customerProfile)
     {
         $response = $this->cimObject->createCustomerProfile($customerProfile);
-        var_dump($response);
         $customerProfileId = $response->getCustomerProfileId();
 
         /**
-                * @todo Setup response handler and error checking 
+                * @todo Setup response and error handling 
                 */
         return $customerProfileId;
     }
