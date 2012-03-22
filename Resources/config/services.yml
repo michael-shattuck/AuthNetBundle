@@ -1,0 +1,16 @@
+parameters:
+    authorize_net.manager.class: Ms2474\AuthNetBundle\AuthorizeNet\AuthorizeNetManager
+    authorize_net.factory.class: Ms2474\AuthNetBundle\AuthorizeNet\AuthorizeNetFactory
+
+services:
+    authorize_net.factory:
+        class:           %authorize_net.factory.class%
+    authorize_net.manager:
+        class:           %authorize_net.manager.class%
+        factory_service: authorize_net.factory
+        factory_method:  get
+        arguments:
+            login_id: %authorize_net.login_id%
+            transaction_key: %authorize_net.transaction_key%
+            sandbox: %authorize_net.sandbox%
+            log_file: %authorize_net.log_file%
