@@ -1,0 +1,135 @@
+<?php
+
+namespace Ms2474\AuthNetBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Ms2474\AuthNetBundle\Entity\AuthNetProfile
+ *
+ * @ORM\Table()
+ * @ORM\Entity
+ * @ORM\HasLifecycleCallbacks
+ */
+class CIMProfile
+{
+    /**
+     * @var integer $id
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    protected $id;
+
+    /**
+     * @var string $ProfileId
+     *
+     * @ORM\Column(name="ProfileId", type="string", length=50)
+     */
+    protected $profileId;
+
+    /**
+     * @var datetime $created_at
+     *
+     * @ORM\Column(name="created_at", type="datetime")
+     */
+    protected $created_at;
+
+    /**
+     * @var datetime $modified_at
+     *
+     * @ORM\Column(name="modified_at", type="datetime")
+     */
+    protected $modified_at;
+
+    public function __construct()
+    {
+        $this->created_at = new \DateTime();
+        $this->modified_at = new \DateTime();
+    }
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set ProfileId
+     *
+     * @param string $profileId
+     * @return AuthNetProfile
+     */
+    public function setProfileId($profileId)
+    {
+        $this->profileId = $profileId;
+        return $this;
+    }
+
+    /**
+     * Get ProfileId
+     *
+     * @return string 
+     */
+    public function getProfileId()
+    {
+        return $this->profileId;
+    }
+
+    /**
+     * Set created_at
+     *
+     * @param datetime $createdAt
+     * @return AuthNetProfile
+     */
+    public function setCreatedAt($createdAt)
+    {
+        $this->created_at = $createdAt;
+        return $this;
+    }
+
+    /**
+     * Get created_at
+     *
+     * @return datetime 
+     */
+    public function getCreatedAt()
+    {
+        return $this->created_at;
+    }
+
+    /**
+     * Set modified_at
+     *
+     * @param datetime $modifiedAt
+     * @return AuthNetProfile
+     */
+    public function setModifiedAt($modifiedAt)
+    {
+        $this->modified_at = $modifiedAt;
+        return $this;
+    }
+
+    /**
+     * Get modified_at
+     *
+     * @return datetime 
+     */
+    public function getModifiedAt()
+    {
+        return $this->modified_at;
+    }
+
+    /**
+     * @ORM\PreUpdate
+     */
+    public function doStuffOnPreUpdate()
+    {
+        $this->modified_at = new \DateTime();
+    }
+}
