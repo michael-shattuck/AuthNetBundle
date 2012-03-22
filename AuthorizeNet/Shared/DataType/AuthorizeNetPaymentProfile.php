@@ -21,8 +21,8 @@ class AuthorizeNetPaymentProfile
     
     public function __construct()
     {
-        $this->billTo = new AuthorizeNetAddress;
-        $this->payment = new AuthorizeNetPayment;
+        $this->billTo = new AuthorizeNetAddress();
+        $this->payment = new AuthorizeNetPayment();
     }
 
 }

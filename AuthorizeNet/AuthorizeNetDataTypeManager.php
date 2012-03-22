@@ -15,7 +15,7 @@ use Ms2474\AuthNetBundle\AuthorizeNet\Shared\DataType\AuthorizeNet_Subscription;
 /**
  * @author Michael Shattuck <ms2474@gmail.com>
  */
-class AuthorizeNetBaseManager
+class AuthorizeNetDataTypeManager
 {
     public function newAddress()
     {
@@ -49,7 +49,7 @@ class AuthorizeNetBaseManager
 
     public function newPaymentProfile()
     {
-        return new AuthorizeNetPayment();
+        return new AuthorizeNetPaymentProfile();
     }
 
     public function newTransaction()

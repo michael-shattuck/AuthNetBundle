@@ -18,7 +18,7 @@ use Ms2474\AuthNetBundle\AuthorizeNet\API\TD\AuthorizeNetTD_Response;
 /**
  * @author Michael Shattuck <ms2474@gmail.com>
  */
-class AuthorizeNetManager extends AuthorizeNetBaseManager
+class AuthorizeNetManager extends AuthorizeNetDataTypeManager
 {
     protected $loginId;
     protected $transactionKey;
@@ -33,7 +33,12 @@ class AuthorizeNetManager extends AuthorizeNetBaseManager
         $this->logFile = $logFile;
     }
 
-    public function getAuthorizeNetCIM()
+    public function getCIMManager()
+    {
+        return new Manager\CIMManager($this->getAuthorizeNetCIM());
+    }
+
+    private function getAuthorizeNetCIM()
     {
         return new AuthorizeNetCIM($this->loginId, $this->transactionKey, $this->sandbox, $this->logFile);
     }

@@ -18,7 +18,7 @@ class AuthorizeNetPayment
     
     public function __construct()
     {
-        $this->creditCard = new AuthorizeNetCreditCard;
-        $this->bankAccount = new AuthorizeNetBankAccount;
+        $this->creditCard = new AuthorizeNetCreditCard();
+        $this->bankAccount = new AuthorizeNetBankAccount();
     }
 }

@@ -4,6 +4,9 @@ namespace Ms2474\AuthNetBundle\Form\CIM;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilder;
+use Symfony\Component\Form\FormError;
+use Symfony\Component\Form\CallbackValidator;
+use Symfony\Component\Form\FormInterface;
 
 class CIMPaymentProfileType extends AbstractType
 {
@@ -13,13 +16,23 @@ class CIMPaymentProfileType extends AbstractType
             ->add('cardnumber', 'number', array(
                 'required' => true
             ))
-            ->add('expirationdate', 'date', array(
+            ->add('expirationyear', 'integer', array(
                 'required' => true,
-                'input' => 'string',
-                'widget' => 'choice',
-                'pattern' => '{{ year }} - {{ month }}',
-                'format' => 'yyyy-MM'
             ))
+            ->add('expirationmonth', 'integer', array(
+                'required' => true,
+            ))
+        ;
+
+        $builder
+            ->addValidator(new CallbackValidator(function(FormInterface $form) {
+                if ($form["expirationyear"]->getData() < date('Y')) {
+                    $form->addError(new FormError('Invalid expiration year.'));
+                }
+                if ($form["expirationmonth"]->getData() < 0 || $form["expirationmonth"]->getData() > 12) {
+                    $form->addError(new FormError('Invalid expiration month.'));
+                }
+            }))
         ;
     }
 

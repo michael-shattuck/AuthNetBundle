@@ -37,6 +37,9 @@ class CIMAddressType extends AbstractType
             ->add('zip', 'text', array(
                 'required' => true
             ))
+            ->add('country', 'text', array(
+                'required' => true
+            ))
         ;
     }
 
