@@ -26,6 +26,6 @@ class CIMProfileBusinessType extends AbstractType
 
     public function getName()
     {
-        return 'ms2474_authnetbundle_cimprofilebusinesstype';
+        return 'clamidity_authnetbundle_cimprofilebusinesstype';
     }
 }

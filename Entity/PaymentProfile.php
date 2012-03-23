@@ -5,13 +5,13 @@ namespace Clamidity\AuthNetBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Clamidity\AuthNetBundle\Entity\AuthNetProfile
+ * Clamidity\AuthNetBundle\Entity\PaymentProfile
  *
  * @ORM\Table()
  * @ORM\Entity
  * @ORM\HasLifecycleCallbacks
  */
-class CIMProfile
+class PaymentProfile
 {
     /**
      * @var integer $id
@@ -23,11 +23,11 @@ class CIMProfile
     protected $id;
 
     /**
-     * @var string $profileId
+     * @var string $paymentProfileId
      *
-     * @ORM\Column(name="profileId", type="integer", length=50)
+     * @ORM\Column(name="paymentProfileId", type="integer", length=50)
      */
-    protected $profileId;
+    protected $paymentProfileId;
 
     /**
      * @var datetime $created_at
@@ -62,12 +62,12 @@ class CIMProfile
     /**
      * Set ProfileId
      *
-     * @param string $profileId
-     * @return AuthNetProfile
+     * @param string $paymentProfileId
+     * @return PaymentProfile
      */
-    public function setProfileId($profileId)
+    public function setPaymemtProfileId($paymentProfileId)
     {
-        $this->profileId = $profileId;
+        $this->paymentProfileId = $paymentProfileId;
         return $this;
     }
 
@@ -76,16 +76,16 @@ class CIMProfile
      *
      * @return string 
      */
-    public function getProfileId()
+    public function getPaymemtProfileId()
     {
-        return $this->profileId;
+        return $this->paymentProfileId;
     }
 
     /**
      * Set created_at
      *
      * @param datetime $createdAt
-     * @return AuthNetProfile
+     * @return PaymentProfile
      */
     public function setCreatedAt($createdAt)
     {
@@ -107,7 +107,7 @@ class CIMProfile
      * Set modified_at
      *
      * @param datetime $modifiedAt
-     * @return AuthNetProfile
+     * @return PaymentProfile
      */
     public function setModifiedAt($modifiedAt)
     {

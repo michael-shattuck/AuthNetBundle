@@ -1,12 +1,12 @@
-ms2474_authnet_cimprofile_index:
+clamidity_authnet_cimprofile_index:
     pattern: /
     defaults: { _controller: ClamidityAuthNetBundle:CIMProfile:index }
 
-ms2474_authnet_cimprofile_new_individual:
+clamidity_authnet_cimprofile_new_individual:
     pattern: /new/individual
     defaults: { _controller: ClamidityAuthNetBundle:CIMProfile:newIndividual }
 
-ms2474_authnet_cimprofile_post:
+clamidity_authnet_cimprofile_post:
     pattern: /post
     defaults: { _controller: ClamidityAuthNetBundle:CIMProfile:postIndividual }
     requirements:

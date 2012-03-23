@@ -45,6 +45,6 @@ class CIMAddressType extends AbstractType
 
     public function getName()
     {
-        return 'ms2474_authnetbundle_cimprofileaddresstype';
+        return 'clamidity_authnetbundle_cimprofileaddresstype';
     }
 }

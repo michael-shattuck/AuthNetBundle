@@ -38,6 +38,6 @@ class CIMPaymentProfileType extends AbstractType
 
     public function getName()
     {
-        return 'ms2474_authnetbundle_cimpaymentprofiletype';
+        return 'clamidity_authnetbundle_cimpaymentprofiletype';
     }
 }
