@@ -1,16 +1,16 @@
 <?php
 
-namespace Ms2474\AuthNetBundle\AuthorizeNet;
+namespace Clamidity\AuthNetBundle\AuthorizeNet;
 
-use Ms2474\AuthNetBundle\AuthorizeNet\Shared\DataType\AuthorizeNetAddress;
-use Ms2474\AuthNetBundle\AuthorizeNet\Shared\DataType\AuthorizeNetBankAccount;
-use Ms2474\AuthNetBundle\AuthorizeNet\Shared\DataType\AuthorizeNetCreditCard;
-use Ms2474\AuthNetBundle\AuthorizeNet\Shared\DataType\AuthorizeNetCustomer;
-use Ms2474\AuthNetBundle\AuthorizeNet\Shared\DataType\AuthorizeNetLineItem;
-use Ms2474\AuthNetBundle\AuthorizeNet\Shared\DataType\AuthorizeNetPayment;
-use Ms2474\AuthNetBundle\AuthorizeNet\Shared\DataType\AuthorizeNetPaymentProfile;
-use Ms2474\AuthNetBundle\AuthorizeNet\Shared\DataType\AuthorizeNetTransaction;
-use Ms2474\AuthNetBundle\AuthorizeNet\Shared\DataType\AuthorizeNet_Subscription;
+use Clamidity\AuthNetBundle\AuthorizeNet\Shared\DataType\AuthorizeNetAddress;
+use Clamidity\AuthNetBundle\AuthorizeNet\Shared\DataType\AuthorizeNetBankAccount;
+use Clamidity\AuthNetBundle\AuthorizeNet\Shared\DataType\AuthorizeNetCreditCard;
+use Clamidity\AuthNetBundle\AuthorizeNet\Shared\DataType\AuthorizeNetCustomer;
+use Clamidity\AuthNetBundle\AuthorizeNet\Shared\DataType\AuthorizeNetLineItem;
+use Clamidity\AuthNetBundle\AuthorizeNet\Shared\DataType\AuthorizeNetPayment;
+use Clamidity\AuthNetBundle\AuthorizeNet\Shared\DataType\AuthorizeNetPaymentProfile;
+use Clamidity\AuthNetBundle\AuthorizeNet\Shared\DataType\AuthorizeNetTransaction;
+use Clamidity\AuthNetBundle\AuthorizeNet\Shared\DataType\AuthorizeNet_Subscription;
 
 /**
  * @author Michael Shattuck <ms2474@gmail.com>

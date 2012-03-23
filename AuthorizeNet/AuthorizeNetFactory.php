@@ -1,6 +1,6 @@
 <?php
 
-namespace Ms2474\AuthNetBundle\AuthorizeNet;
+namespace Clamidity\AuthNetBundle\AuthorizeNet;
 
 /**
  * @author Michael Shattuck <ms2474@gmail.com>

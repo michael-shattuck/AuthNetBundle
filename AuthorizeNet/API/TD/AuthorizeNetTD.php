@@ -1,8 +1,8 @@
 <?php
 
-namespace Ms2474\AuthNetBundle\AuthorizeNet\API\TD;
+namespace Clamidity\AuthNetBundle\AuthorizeNet\API\TD;
 
-use Ms2474\AuthNetBundle\AuthorizeNet\Shared\AuthorizeNetRequest;
+use Clamidity\AuthNetBundle\AuthorizeNet\Shared\AuthorizeNetRequest;
 
 /**
  * Easily interact with the Authorize.Net Transaction Details XML API.

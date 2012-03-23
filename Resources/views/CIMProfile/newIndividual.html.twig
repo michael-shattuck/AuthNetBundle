@@ -1,6 +1,6 @@
-{% extends 'Ms2474AuthNetBundle::layout.html.twig' %}
+{% extends 'ClamidityAuthNetBundle::layout.html.twig' %}
 
-{% form_theme form 'Ms2474AuthNetBundle::form.html.twig' %}
+{% form_theme form 'ClamidityAuthNetBundle::form.html.twig' %}
 
 {% block ms2474_authnet_content %}
 <form action="{{ path('ms2474_authnet_cimprofile_post') }}" method="post" {{ form_enctype(form) }}>

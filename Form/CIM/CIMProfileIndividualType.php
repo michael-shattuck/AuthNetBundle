@@ -1,6 +1,6 @@
 <?php
 
-namespace Ms2474\AuthNetBundle\Form\CIM;
+namespace Clamidity\AuthNetBundle\Form\CIM;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilder;

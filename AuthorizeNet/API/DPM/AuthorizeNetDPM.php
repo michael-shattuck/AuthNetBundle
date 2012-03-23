@@ -1,8 +1,8 @@
 <?php
 
-namespace Ms2474\AuthNetBundle\AuthorizeNet\API\DPM;
+namespace Clamidity\AuthNetBundle\AuthorizeNet\API\DPM;
 
-use Ms2474\AuthNetBundle\AuthorizeNet\API\SIM\AuthorizeNetSIMForm;
+use Clamidity\AuthNetBundle\AuthorizeNet\API\SIM\AuthorizeNetSIMForm;
 
 /**
  * Demonstrates the Direct Post Method.

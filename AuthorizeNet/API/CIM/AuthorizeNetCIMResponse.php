@@ -1,8 +1,8 @@
 <?php
 
-namespace Ms2474\AuthNetBundle\AuthorizeNet\API\CIM;
+namespace Clamidity\AuthNetBundle\AuthorizeNet\API\CIM;
 
-use Ms2474\AuthNetBundle\AuthorizeNet\Shared\AuthorizeNetXMLResponse;
+use Clamidity\AuthNetBundle\AuthorizeNet\Shared\AuthorizeNetXMLResponse;
 
 /**
  * A class to parse a response from the CIM XML API.

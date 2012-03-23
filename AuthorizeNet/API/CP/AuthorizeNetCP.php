@@ -1,8 +1,8 @@
 <?php
 
-namespace Ms2474\AuthNetBundle\AuthorizeNet\API\CP;
+namespace Clamidity\AuthNetBundle\AuthorizeNet\API\CP;
 
-use Ms2474\AuthNetBundle\AuthorizeNet\API\AIM\AuthorizeNetAIM;
+use Clamidity\AuthNetBundle\AuthorizeNet\API\AIM\AuthorizeNetAIM;
 
 /**
  * Easily interact with the Authorize.Net Card Present API.

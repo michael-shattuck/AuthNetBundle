@@ -1,6 +1,6 @@
 <?php
 
-namespace Ms2474\AuthNetBundle\AuthorizeNet\Shared\DataType;
+namespace Clamidity\AuthNetBundle\AuthorizeNet\Shared\DataType;
 
 /**
  * A class that contains all fields for a CIM Address.

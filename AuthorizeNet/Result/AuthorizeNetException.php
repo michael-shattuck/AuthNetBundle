@@ -1,6 +1,6 @@
 <?php
 
-namespace Ms2474\AuthNetBundle\AuthorizeNet\Result;
+namespace Clamidity\AuthNetBundle\AuthorizeNet\Result;
 
 /**
 * Exception class for AuthorizeNet PHP SDK.
