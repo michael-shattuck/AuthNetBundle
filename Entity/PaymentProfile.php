@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Clamidity\AuthNetBundle\Entity\PaymentProfile
  *
- * @ORM\Table()
+ * @ORM\Table(name="clamidity_paymentprofile")
  * @ORM\Entity
  * @ORM\HasLifecycleCallbacks
  */
@@ -42,6 +42,13 @@ class PaymentProfile
      * @ORM\Column(name="modified_at", type="datetime")
      */
     protected $modified_at;
+
+    /**
+     * @var type AuthorizeNetCustomer
+     * 
+     * @ORM\ManyToOne(targetEntity="\Clamidity\AuthNetBundle\Entity\CustomerProfile", inversedBy="paymentProfiles")
+     */
+    protected $customer;
 
     public function __construct()
     {

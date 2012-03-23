@@ -7,11 +7,11 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Clamidity\AuthNetBundle\Entity\AuthNetProfile
  *
- * @ORM\Table()
+ * @ORM\Table(name="clamidity_transaction")
  * @ORM\Entity
  * @ORM\HasLifecycleCallbacks
  */
-class CIMProfile
+class Transaction
 {
     /**
      * @var integer $id
@@ -21,13 +21,6 @@ class CIMProfile
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
-
-    /**
-     * @var string $transactionId
-     *
-     * @ORM\Column(name="transactionId", type="integer", length=50)
-     */
-    protected $transactionId;
 
     /**
      * @var string $transactionId
@@ -49,6 +42,13 @@ class CIMProfile
      * @ORM\Column(name="modified_at", type="datetime")
      */
     protected $modified_at;
+
+    /**
+     * @var type AuthorizeNetCustomer
+     * 
+     * @ORM\ManyToOne(targetEntity="\Clamidity\AuthNetBundle\Entity\CustomerProfile", inversedBy="transactions")
+     */
+    protected $customer;
 
     public function __construct()
     {

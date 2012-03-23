@@ -1,13 +1,13 @@
-clamidity_authnet_cimprofile_index:
+clamidity_authnet_customerprofile_index:
     pattern: /
-    defaults: { _controller: ClamidityAuthNetBundle:CIMProfile:index }
+    defaults: { _controller: ClamidityAuthNetBundle:CustomerProfile:index }
 
-clamidity_authnet_cimprofile_new_individual:
+clamidity_authnet_customerprofile_new_individual:
     pattern: /new/individual
-    defaults: { _controller: ClamidityAuthNetBundle:CIMProfile:newIndividual }
+    defaults: { _controller: ClamidityAuthNetBundle:CustomerProfile:newIndividual }
 
-clamidity_authnet_cimprofile_post:
+clamidity_authnet_customerprofile_post:
     pattern: /post
-    defaults: { _controller: ClamidityAuthNetBundle:CIMProfile:postIndividual }
+    defaults: { _controller: ClamidityAuthNetBundle:CustomerProfile:postIndividual }
     requirements:
         _method: POST

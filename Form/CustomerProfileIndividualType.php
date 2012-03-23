@@ -1,11 +1,11 @@
 <?php
 
-namespace Clamidity\AuthNetBundle\Form\CIM;
+namespace Clamidity\AuthNetBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilder;
 
-class CIMProfileIndividualType extends AbstractType
+class CustomerProfileIndividualType extends AbstractType
 {
     public function buildForm(FormBuilder $builder, array $options)
     {
@@ -19,13 +19,13 @@ class CIMProfileIndividualType extends AbstractType
             ->add('type', 'hidden', array(
                 'data' => 'individual',
             ))
-            ->add('shippingaddress', new CIMAddressType())
-            ->add('paymentprofile', new CIMPaymentProfileType())
+            ->add('shippingaddress', new ShippingAddressType())
+            ->add('paymentprofile', new PaymentProfileType())
         ;
     }
 
     public function getName()
     {
-        return 'clamidity_authnetbundle_cimprofileindividualtype';
+        return 'clamidity_authnetbundle_customerprofileindividualtype';
     }
 }

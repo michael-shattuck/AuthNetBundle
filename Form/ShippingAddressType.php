@@ -1,11 +1,11 @@
 <?php
 
-namespace Clamidity\AuthNetBundle\Form\CIM;
+namespace Clamidity\AuthNetBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilder;
 
-class CIMAddressType extends AbstractType
+class ShippingAddressType extends AbstractType
 {
     public function buildForm(FormBuilder $builder, array $options)
     {
@@ -45,6 +45,6 @@ class CIMAddressType extends AbstractType
 
     public function getName()
     {
-        return 'clamidity_authnetbundle_cimprofileaddresstype';
+        return 'clamidity_authnetbundle_customerprofileaddresstype';
     }
 }

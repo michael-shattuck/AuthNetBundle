@@ -13,3 +13,17 @@ services:
             transaction_key: %authorize_net.transaction_key%
             sandbox: %authorize_net.sandbox%
             log_file: %authorize_net.log_file%
+    clamidity_authnet.listener.customer_address_creator:
+        class: Clamidity\AuthNetBundle\EventListener\CustomerPaymentProfileSubscriber
+        arguments:
+            em: "@doctrine.orm.entity_manager"
+            securityContext: "@security.context"
+        tags:
+             - { name: kernel.event_subscriber, event: authnet.customer.add_address, method: addPaymentProfile }
+    clamidity_authnet.listener.customer_paymentprofile_creator:
+        class: Clamidity\AuthNetBundle\EventListener\CustomerAddressSubscriber
+        arguments:
+            em: "@doctrine.orm.entity_manager"
+            securityContext: "@security.context"
+        tags:
+            - { name: kernel.event_subscriber, event: authnet.customer.add_address, method: addAddress }

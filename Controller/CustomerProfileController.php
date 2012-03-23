@@ -3,21 +3,21 @@
 namespace Clamidity\AuthNetBundle\Controller;
 
 use Symfony\Component\DependencyInjection\ContainerAware;
-use Clamidity\AuthNetBundle\Entity\CIMProfile;
-use Clamidity\AuthNetBundle\Form\CIM\CIMProfileIndividualType;
+use Clamidity\AuthNetBundle\Entity\CustomerProfile;
+use Clamidity\AuthNetBundle\Form\CIM\CustomerProfileIndividualType;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
-class CIMProfileController extends ContainerAware
+class CustomerProfileController extends ContainerAware
 {
     protected $CIMManager;
     protected $authNetManager;
 
     public function indexAction()
     {
-        $profileIdArray = $this->container->get('doctrine')->getRepository("ClamidityAuthNetBundle:CIMProfile")->findAll();
+        $profileIdArray = $this->container->get('doctrine')->getRepository("ClamidityAuthNetBundle:CustomerProfile")->findAll();
 
         return $this->container->get('templating')->renderResponse(
-            'ClamidityAuthNetBundle:CIMProfile:index.html.twig', array(
+            'ClamidityAuthNetBundle:CustomerProfile:index.html.twig', array(
                 'ids' => $profileIdArray,
             )
         );
@@ -25,10 +25,10 @@ class CIMProfileController extends ContainerAware
 
     public function newIndividualAction()
     {
-        $form = $this->container->get('form.factory')->create(new CIMProfileIndividualType());
+        $form = $this->container->get('form.factory')->create(new CustomerProfileIndividualType());
 
         return $this->container->get('templating')->renderResponse(
-            'ClamidityAuthNetBundle:CIMProfile:newIndividual.html.twig', array(
+            'ClamidityAuthNetBundle:CustomerProfile:newIndividual.html.twig', array(
                 'form' => $form->createView(),
             )
         );
@@ -39,11 +39,11 @@ class CIMProfileController extends ContainerAware
         $request = $this->getRequest();
         $errors = null;
 
-        $form = $this->getFormFactory()->create(new CIMProfileIndividualType());
+        $form = $this->getFormFactory()->create(new CustomerProfileIndividualType());
         $form->bindRequest($request);
 
         if ($form->isValid()) {
-            $customerProfileArray = $request->get('clamidity_authnetbundle_cimprofileindividualtype');
+            $customerProfileArray = $request->get('clamidity_authnetbundle_customerprofileindividualtype');
 
             $manager = $this->getAuthorizeNetManager();
             $customerProfile = $this->getCustomerProfileObject($manager);
@@ -66,19 +66,17 @@ class CIMProfileController extends ContainerAware
 
             $customerProfileId = $CIMManager->postCustomerProfile($customerProfile);
 
-            var_dump($customerProfileId);
             if ($customerProfileId) {
-                $CIMProfile = new CIMProfile();
-                $CIMProfile->setProfileId($customerProfileId);
+                $CustomerProfile = new CustomerProfile();
+                $CustomerProfile->setProfileId($customerProfileId);
 
                 $em = $this->container->get('doctrine')->getEntityManager();
-                $em->persist($CIMProfile);
+                $em->persist($CustomerProfile);
                 $em->flush();
-                echo "test";
             }
 
             $uri = $this->container->get('router')->generate(
-                'clamidity_authnet_cimprofile_index'
+                'clamidity_authnet_customerprofile_index'
             );
 
             return new RedirectResponse($uri);
@@ -89,7 +87,7 @@ class CIMProfileController extends ContainerAware
         }
 
         return $this->container->get('templating')->renderResponse(
-            'ClamidityAuthNetBundle:CIMProfile:newIndividual.html.twig', array(
+            'ClamidityAuthNetBundle:CustomerProfile:newIndividual.html.twig', array(
                 'form' => $form->createView(),
                 'errors' => $errors,
             )
@@ -114,7 +112,7 @@ class CIMProfileController extends ContainerAware
     public function newTransaction()
     {
         return $this->container->get('templating')->renderResponse(
-            'ClamidityAuthNetBundle:CIMProfile:index.html.twig', array(
+            'ClamidityAuthNetBundle:CustomerProfile:index.html.twig', array(
                 'ids' => $profileIdArray,
             )
         );

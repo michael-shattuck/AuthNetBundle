@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Clamidity\AuthNetBundle\Entity\ShippingAddress
  *
- * @ORM\Table()
+ * @ORM\Table(name="clamidity_shippingaddress")
  * @ORM\Entity
  * @ORM\HasLifecycleCallbacks
  */
@@ -42,6 +42,13 @@ class ShippingAddress
      * @ORM\Column(name="modified_at", type="datetime")
      */
     protected $modified_at;
+
+    /**
+     * @var type AuthorizeNetCustomer
+     * 
+     * @ORM\ManyToOne(targetEntity="\Clamidity\AuthNetBundle\Entity\CustomerProfile", inversedBy="shippingAddresses")
+     */
+    protected $customer;
 
     public function __construct()
     {
@@ -123,6 +130,28 @@ class ShippingAddress
     public function getModifiedAt()
     {
         return $this->modified_at;
+    }
+
+    /**
+     * Set customer
+     *
+     * @param CustomerProfile $customer
+     * @return ShippingAddress
+     */
+    public function setCustomer($customer)
+    {
+        $this->customer = $customer;
+        return $this;
+    }
+
+    /**
+     * Get customer
+     *
+     * @return CustomerProfile 
+     */
+    public function getCustomer()
+    {
+        return $this->customer;
     }
 
     /**

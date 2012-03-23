@@ -1,11 +1,11 @@
 <?php
 
-namespace Clamidity\AuthNetBundle\Form\CIM;
+namespace Clamidity\AuthNetBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilder;
 
-class CIMProfileBusinessType extends AbstractType
+class CustomerProfileBusinessType extends AbstractType
 {
     public function buildForm(FormBuilder $builder, array $options)
     {
@@ -26,6 +26,6 @@ class CIMProfileBusinessType extends AbstractType
 
     public function getName()
     {
-        return 'clamidity_authnetbundle_cimprofilebusinesstype';
+        return 'clamidity_authnetbundle_customerprofilebusinesstype';
     }
 }

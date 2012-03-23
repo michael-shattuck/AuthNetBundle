@@ -7,11 +7,11 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Clamidity\AuthNetBundle\Entity\AuthNetProfile
  *
- * @ORM\Table()
+ * @ORM\Table(name="clamidity_customerprofile")
  * @ORM\Entity
  * @ORM\HasLifecycleCallbacks
  */
-class CIMProfile
+class CustomerProfile
 {
     /**
      * @var integer $id
@@ -42,6 +42,27 @@ class CIMProfile
      * @ORM\Column(name="modified_at", type="datetime")
      */
     protected $modified_at;
+
+    /**
+     * @var type AuthorizeNetPaymentProfile
+     * 
+     * @ORM\OneToMany(targetEntity="\Clamidity\AuthNetBundle\Entity\PaymentProfile", mappedBy="customer")
+     */
+    protected $paymentProfiles;
+
+    /**
+     * @var type AuthorizeNetAddress
+     * 
+     * @ORM\OneToMany(targetEntity="\Clamidity\AuthNetBundle\Entity\ShippingAddress", mappedBy="customer")
+     */
+    protected $shippingAddresses;
+
+    /**
+     * @var type AuthorizeNetTransaction
+     * 
+     * @ORM\OneToMany(targetEntity="\Clamidity\AuthNetBundle\Entity\Transaction", mappedBy="customer")
+     */
+    protected $transactions;
 
     public function __construct()
     {
