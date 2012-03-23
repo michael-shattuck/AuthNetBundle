@@ -9,7 +9,7 @@ use Symfony\Component\Config\FileLocator;
 use Symfony\Component\Config\Definition\Processor;
 
 /**
- * @author Michael Shattuck <ms2474@gmail.com>
+ * @author Michael Shattuck <clamidity@gmail.com>
  */
 class ClamidityAuthNetExtension extends Extension
 {

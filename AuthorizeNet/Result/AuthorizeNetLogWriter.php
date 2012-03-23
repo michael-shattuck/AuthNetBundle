@@ -3,7 +3,7 @@
 namespace Clamidity\AuthNetBundle\AuthorizeNet\Result;
 
 /**
- * @author Michael Shattuck <ms2474@gmail.com>
+ * @author Michael Shattuck <clamidity@gmail.com>
  */
 class AuthorizeNetLogWriter
 {

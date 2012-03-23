@@ -8,7 +8,7 @@ use Clamidity\AuthNetBundle\AuthorizeNet\Shared\DataType;
 use Clamidity\AuthNetBundle\AuthorizeNet\Result\AuthorizeNetResultHandler;
 
 /**
- * @author Michael Shattuck <ms2474@gmail.com>
+ * @author Michael Shattuck <clamidity@gmail.com>
  */
 class CIMManager extends AuthorizeNetResultHandler
 {

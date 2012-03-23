@@ -43,7 +43,7 @@ class CIMProfileController extends ContainerAware
         $form->bindRequest($request);
 
         if ($form->isValid()) {
-            $customerProfileArray = $request->get('ms2474_authnetbundle_cimprofileindividualtype');
+            $customerProfileArray = $request->get('clamidity_authnetbundle_cimprofileindividualtype');
 
             $manager = $this->getAuthorizeNetManager();
             $customerProfile = $this->getCustomerProfileObject($manager);
@@ -78,7 +78,7 @@ class CIMProfileController extends ContainerAware
             }
 
             $uri = $this->container->get('router')->generate(
-                'ms2474_authnet_cimprofile_index'
+                'clamidity_authnet_cimprofile_index'
             );
 
             return new RedirectResponse($uri);

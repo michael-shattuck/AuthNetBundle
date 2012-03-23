@@ -23,11 +23,18 @@ class CIMProfile
     protected $id;
 
     /**
-     * @var string $profileId
+     * @var string $transactionId
      *
-     * @ORM\Column(name="profileId", type="integer", length=50)
+     * @ORM\Column(name="transactionId", type="integer", length=50)
      */
-    protected $profileId;
+    protected $transactionId;
+
+    /**
+     * @var string $transactionId
+     *
+     * @ORM\Column(name="transactionId", type="integer", length=50)
+     */
+    protected $transactionId;
 
     /**
      * @var datetime $created_at
@@ -60,25 +67,25 @@ class CIMProfile
     }
 
     /**
-     * Set ProfileId
+     * Set TransactionId
      *
-     * @param string $profileId
+     * @param string $transactionId
      * @return AuthNetProfile
      */
-    public function setProfileId($profileId)
+    public function setTransactionId($transactionId)
     {
-        $this->profileId = $profileId;
+        $this->transactionId = $transactionId;
         return $this;
     }
 
     /**
-     * Get ProfileId
+     * Get TransactionId
      *
      * @return string 
      */
-    public function getProfileId()
+    public function getTransactionId()
     {
-        return $this->profileId;
+        return $this->transactionId;
     }
 
     /**

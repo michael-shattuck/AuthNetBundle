@@ -26,6 +26,6 @@ class CIMProfileIndividualType extends AbstractType
 
     public function getName()
     {
-        return 'ms2474_authnetbundle_cimprofileindividualtype';
+        return 'clamidity_authnetbundle_cimprofileindividualtype';
     }
 }

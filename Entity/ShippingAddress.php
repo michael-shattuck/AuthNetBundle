@@ -5,13 +5,13 @@ namespace Clamidity\AuthNetBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Clamidity\AuthNetBundle\Entity\AuthNetProfile
+ * Clamidity\AuthNetBundle\Entity\ShippingAddress
  *
  * @ORM\Table()
  * @ORM\Entity
  * @ORM\HasLifecycleCallbacks
  */
-class CIMProfile
+class ShippingAddress
 {
     /**
      * @var integer $id
@@ -23,11 +23,11 @@ class CIMProfile
     protected $id;
 
     /**
-     * @var string $profileId
+     * @var string $shippingAddressId
      *
-     * @ORM\Column(name="profileId", type="integer", length=50)
+     * @ORM\Column(name="shippingAddressId", type="integer", length=50)
      */
-    protected $profileId;
+    protected $shippingAddressId;
 
     /**
      * @var datetime $created_at
@@ -60,32 +60,32 @@ class CIMProfile
     }
 
     /**
-     * Set ProfileId
+     * Set ShippingAddressId
      *
-     * @param string $profileId
-     * @return AuthNetProfile
+     * @param string $shippingAddressId
+     * @return ShippingAddress
      */
-    public function setProfileId($profileId)
+    public function setShippingAddressId($shippingAddressId)
     {
-        $this->profileId = $profileId;
+        $this->shippingAddressId = $shippingAddressId;
         return $this;
     }
 
     /**
-     * Get ProfileId
+     * Get ShippingAddressId
      *
      * @return string 
      */
-    public function getProfileId()
+    public function getShippingAddressId()
     {
-        return $this->profileId;
+        return $this->shippingAddressId;
     }
 
     /**
      * Set created_at
      *
      * @param datetime $createdAt
-     * @return AuthNetProfile
+     * @return ShippingAddress
      */
     public function setCreatedAt($createdAt)
     {
@@ -107,7 +107,7 @@ class CIMProfile
      * Set modified_at
      *
      * @param datetime $modifiedAt
-     * @return AuthNetProfile
+     * @return ShippingAddress
      */
     public function setModifiedAt($modifiedAt)
     {

@@ -2,12 +2,12 @@
 
 {% form_theme form 'ClamidityAuthNetBundle::form.html.twig' %}
 
-{% block ms2474_authnet_content %}
-<form action="{{ path('ms2474_authnet_cimprofile_post') }}" method="post" {{ form_enctype(form) }}>
+{% block clamidity_authnet_content %}
+<form action="{{ path('clamidity_authnet_cimprofile_post') }}" method="post" {{ form_enctype(form) }}>
     {{ form_widget(form) }}
 
     <p>
         <button type="submit">Submit</button>
     </p>
 </form>
-{% endblock ms2474_authnet_content %}
+{% endblock clamidity_authnet_content %}
