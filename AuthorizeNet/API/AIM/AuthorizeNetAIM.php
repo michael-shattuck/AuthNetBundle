@@ -3,7 +3,7 @@
 namespace Ms2474\AuthNetBundle\AuthorizeNet\API\AIM;
 
 use Ms2474\AuthNetBundle\AuthorizeNet\Shared\AuthorizeNetRequest;
-
+use Ms2474\AuthNetBundle\AuthorizeNet\Result\AuthorizeNetException;
 /**
  * Easily interact with the Authorize.Net AIM API.
  *

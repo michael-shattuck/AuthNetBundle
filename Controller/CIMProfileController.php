@@ -9,9 +9,18 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class CIMProfileController extends ContainerAware
 {
+    protected $CIMManager;
+    protected $authNetManager;
+
     public function indexAction()
     {
-        
+        $profileIdArray = $this->container->get('doctrine')->getRepository("Ms2474AuthNetBundle:CIMProfile")->findAll();
+
+        return $this->container->get('templating')->renderResponse(
+            'Ms2474AuthNetBundle:CIMProfile:index.html.twig', array(
+                'ids' => $profileIdArray,
+            )
+        );
     }
 
     public function newIndividualAction()
@@ -25,7 +34,7 @@ class CIMProfileController extends ContainerAware
         );
     }
 
-    public function postAction()
+    public function postIndividualAction()
     {
         $request = $this->getRequest();
         $errors = null;
@@ -37,26 +46,36 @@ class CIMProfileController extends ContainerAware
             $customerProfileArray = $request->get('ms2474_authnetbundle_cimprofileindividualtype');
 
             $manager = $this->getAuthorizeNetManager();
-            $customerProfile = $this->getCustomerProfileObject($customerProfileArray, $manager);
+            $customerProfile = $this->getCustomerProfileObject($manager);
+            $customerProfile->description = $customerProfileArray['customerdescription'];
+            $customerProfile->email = $customerProfileArray['email'];
+            /**
+                    * @todo Add support for user set merchant customer id
+                    */
+            $customerProfile->merchantCustomerId = time();
 
             $CIMManager = $manager->getCIMManager();
-
-            if ($customerProfileArray['shippingaddress']) {
-                $customerProfile = $CIMManager->addAddress($customerProfile, $customerProfileArray['shippingaddress'], $manager);
-            }
 
             if ($customerProfileArray['paymentprofile']) {
                 $customerProfile = $CIMManager->addPaymentProfileIndividual($customerProfile, $customerProfileArray['paymentprofile'], $manager);
             }
 
+            if ($customerProfileArray['shippingaddress']) {
+                $customerProfile = $CIMManager->addAddress($customerProfile, $customerProfileArray['shippingaddress'], $manager);
+            }
+
             $customerProfileId = $CIMManager->postCustomerProfile($customerProfile);
 
-            $CIMProfile = new CIMProfile();
-            $CIMProfile->setProfileId($customerProfileId);
+            var_dump($customerProfileId);
+            if ($customerProfileId) {
+                $CIMProfile = new CIMProfile();
+                $CIMProfile->setProfileId($customerProfileId);
 
-            $em = $this->container->get('doctrine')->getEntityManager();
-            $em->persist($CIMProfile);
-            $em->flush();
+                $em = $this->container->get('doctrine')->getEntityManager();
+                $em->persist($CIMProfile);
+                $em->flush();
+                echo "test";
+            }
 
             $uri = $this->container->get('router')->generate(
                 'ms2474_authnet_cimprofile_index'
@@ -77,9 +96,68 @@ class CIMProfileController extends ContainerAware
         );
     }
 
+    public function deleteCustomerProfileAction()
+    {
+        
+    }
+
+    public function updateCustomerProfile()
+    {
+        
+    }
+
+    public function updatePaymentProfile()
+    {
+        
+    }
+
+    public function newTransaction()
+    {
+        return $this->container->get('templating')->renderResponse(
+            'Ms2474AuthNetBundle:CIMProfile:index.html.twig', array(
+                'ids' => $profileIdArray,
+            )
+        );
+    }
+
+    public function postTransaction()
+    {
+        $this->getCIMManager()->createNewTransaction($amount, $customerProfileId, $lineItems, $paymentProfileId, $customerAddressId);
+    }
+    
+    public function voidTransaction()
+    {
+        
+    }
+
+    public function deleteShippingAddress()
+    {
+        
+    }
+
+    private function getCustomerProfile()
+    {
+        
+    }
+    
     private function getAuthorizeNetManager()
     {
+        if ($this->authNetManager) {
+            return $this->authNetManager;
+        }
+
         return $this->container->get('authorize_net.manager');
+    }
+
+    private function getCIMManager()
+    {
+        if ($this->CIMManager) {
+            return $this->CIMManager;
+        } else if ($this->authNetManager) {
+            return $this->authNetManager->getCIMManager();
+        }
+
+        return $this->container->get('authorize_net.manager')->getCIMManager();        
     }
 
     private function getRequest()
@@ -92,17 +170,9 @@ class CIMProfileController extends ContainerAware
         return $this->container->get('form.factory');
     }
 
-    private function getCustomerProfileObject(array $customerProfileArray, \Ms2474\AuthNetBundle\AuthorizeNet\AuthorizeNetManager $manager)
+    private function getCustomerProfileObject(\Ms2474\AuthNetBundle\AuthorizeNet\AuthorizeNetManager $manager)
     {
         $customerProfile = $manager->newCustomer();
-        $customerProfile->description = $customerProfileArray['customerdescription'];
-        $customerProfile->email = $customerProfileArray['email'];
-
-        /**
-                * @todo Add support for user set merchant customer id
-                */
-        $customerProfile->merchantCustomerId = time();
-
         return $customerProfile;
     }
 }

@@ -35,7 +35,7 @@ class AuthorizeNetManager extends AuthorizeNetDataTypeManager
 
     public function getCIMManager()
     {
-        return new Manager\CIMManager($this->getAuthorizeNetCIM());
+        return new Manager\CIMManager($this->getAuthorizeNetCIM(), $this->sandbox);
     }
 
     private function getAuthorizeNetCIM()

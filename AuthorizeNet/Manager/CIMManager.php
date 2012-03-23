@@ -5,17 +5,25 @@ namespace Ms2474\AuthNetBundle\AuthorizeNet\Manager;
 use Ms2474\AuthNetBundle\AuthorizeNet\API\CIM\AuthorizeNetCIM;
 use Ms2474\AuthNetBundle\AuthorizeNet\AuthorizeNetManager;
 use Ms2474\AuthNetBundle\AuthorizeNet\Shared\DataType;
+use Ms2474\AuthNetBundle\AuthorizeNet\Result\AuthorizeNetResultHandler;
 
 /**
  * @author Michael Shattuck <ms2474@gmail.com>
  */
-class CIMManager
+class CIMManager extends AuthorizeNetResultHandler
 {
     protected $cimObject;
+    protected $debugMode;
 
-    public function __construct(AuthorizeNetCIM $cimObject)
+    public function __construct(AuthorizeNetCIM $cimObject, $debugMode)
     {
         $this->cimObject = $cimObject;
+        $this->debugMode - $debugMode;
+    }
+
+    public function getCIMObject()
+    {
+        return $this->cimObject;
     }
 
     public function addAddress(DataType\AuthorizeNetCustomer $customerProfile, array $customerAddressArray, AuthorizeNetManager $manager) {
@@ -51,12 +59,43 @@ class CIMManager
 
     public function postCustomerProfile(DataType\AuthorizeNetCustomer $customerProfile)
     {
-        $response = $this->cimObject->createCustomerProfile($customerProfile);
+        if ($this->debugMode) {
+            $response = $this->cimObject->createCustomerProfile($customerProfile, "testMode");
+        } else {
+            $response = $this->cimObject->createCustomerProfile($customerProfile);
+        }
+
         $customerProfileId = $response->getCustomerProfileId();
 
-        /**
-                * @todo Setup response and error handling 
-                */
+        if (!$this->checkResult($response)) {
+            return false;
+        }
+
         return $customerProfileId;
+    }
+
+    public function createNewTransaction($amount, $customerProfileId, array $lineItems, $paymentProfileId, $customerAddressId)
+    {
+        $transaction = new DataType\AuthorizeNetTransaction();
+        $transaction->amount = $amount;
+        $transaction->customerProfileId = $customerProfileId;
+        $transaction->customerPaymentProfileId = $paymentProfileId;
+        $transaction->customerShippingAddressId = $customerAddressId;
+
+        foreach ($lineItems as $lineItemArray) {
+            $lineItem              = new DataType\AuthorizeNetLineItem();
+            $lineItem->itemId      = $lineItemArray['itemId'];
+            $lineItem->name        = $lineItemArray['name'];
+            $lineItem->description = $lineItemArray['description'];
+            $lineItem->quantity    = $lineItemArray['quantity'];
+            $lineItem->unitPrice   = $lineItemArray['unitPrice'];
+            $lineItem->taxable     = $lineItemArray['taxable'];
+
+            $transaction->lineItems[] = $lineItem;
+        }
+
+        $response = $this->getCIMObject()->createCustomerProfileTransaction("AuthCapture", $transaction);
+        $transactionResponse = $response->getTransactionResponse();
+        return $transactionResponse->transaction_id;
     }
 }
