@@ -1,8 +1,8 @@
 <?php
 
-namespace Ms2474\AuthNetBundle\AuthorizeNet\API\SIM;
+namespace Clamidity\AuthNetBundle\AuthorizeNet\API\SIM;
 
-use Ms2474\AuthNetBundle\AuthorizeNet\Shared\AuthorizeNetResponse;
+use Clamidity\AuthNetBundle\AuthorizeNet\Shared\AuthorizeNetResponse;
 
 /**
  * Easily use the Authorize.Net Server Integration Method(SIM).

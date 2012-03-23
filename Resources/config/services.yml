@@ -1,6 +1,6 @@
 parameters:
-    authorize_net.manager.class: Ms2474\AuthNetBundle\AuthorizeNet\AuthorizeNetManager
-    authorize_net.factory.class: Ms2474\AuthNetBundle\AuthorizeNet\AuthorizeNetFactory
+    authorize_net.manager.class: Clamidity\AuthNetBundle\AuthorizeNet\AuthorizeNetManager
+    authorize_net.factory.class: Clamidity\AuthNetBundle\AuthorizeNet\AuthorizeNetFactory
 services:
     authorize_net.factory:
         class: %authorize_net.factory.class%

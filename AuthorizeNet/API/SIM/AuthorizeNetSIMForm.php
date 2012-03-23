@@ -1,6 +1,6 @@
 <?php
 
-namespace Ms2474\AuthNetBundle\AuthorizeNet\API\SIM;
+namespace Clamidity\AuthNetBundle\AuthorizeNet\API\SIM;
 
 /**
  * A helper class for using hosted order page.

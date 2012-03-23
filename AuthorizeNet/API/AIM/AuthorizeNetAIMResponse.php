@@ -1,8 +1,8 @@
 <?php
 
-namespace Ms2474\AuthNetBundle\AuthorizeNet\API\AIM;
+namespace Clamidity\AuthNetBundle\AuthorizeNet\API\AIM;
 
-use Ms2474\AuthNetBundle\AuthorizeNet\Shared\AuthorizeNetResponse;
+use Clamidity\AuthNetBundle\AuthorizeNet\Shared\AuthorizeNetResponse;
 
 /**
  * Parses an AuthorizeNet AIM Response.

@@ -1,9 +1,9 @@
 <?php
 
-namespace Ms2474\AuthNetBundle\AuthorizeNet\Shared\DataType;
+namespace Clamidity\AuthNetBundle\AuthorizeNet\Shared\DataType;
 
-use Ms2474\AuthNetBundle\AuthorizeNet\Shared\DataType\AuthorizeNetAddress;
-use Ms2474\AuthNetBundle\AuthorizeNet\Shared\DataType\AuthorizeNetPayment;
+use Clamidity\AuthNetBundle\AuthorizeNet\Shared\DataType\AuthorizeNetAddress;
+use Clamidity\AuthNetBundle\AuthorizeNet\Shared\DataType\AuthorizeNetPayment;
 
 /**
  * A class that contains all fields for a CIM Payment Profile.

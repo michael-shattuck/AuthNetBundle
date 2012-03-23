@@ -1,11 +1,11 @@
 <?php
 
-namespace Ms2474\AuthNetBundle\AuthorizeNet\Manager;
+namespace Clamidity\AuthNetBundle\AuthorizeNet\Manager;
 
-use Ms2474\AuthNetBundle\AuthorizeNet\API\CIM\AuthorizeNetCIM;
-use Ms2474\AuthNetBundle\AuthorizeNet\AuthorizeNetManager;
-use Ms2474\AuthNetBundle\AuthorizeNet\Shared\DataType;
-use Ms2474\AuthNetBundle\AuthorizeNet\Result\AuthorizeNetResultHandler;
+use Clamidity\AuthNetBundle\AuthorizeNet\API\CIM\AuthorizeNetCIM;
+use Clamidity\AuthNetBundle\AuthorizeNet\AuthorizeNetManager;
+use Clamidity\AuthNetBundle\AuthorizeNet\Shared\DataType;
+use Clamidity\AuthNetBundle\AuthorizeNet\Result\AuthorizeNetResultHandler;
 
 /**
  * @author Michael Shattuck <ms2474@gmail.com>

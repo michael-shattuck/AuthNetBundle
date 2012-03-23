@@ -1,6 +1,6 @@
 <?php
 
-namespace Ms2474\AuthNetBundle\DependencyInjection;
+namespace Clamidity\AuthNetBundle\DependencyInjection;
 
 use Symfony\Component\Config\Definition\Builder\NodeBuilder;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;

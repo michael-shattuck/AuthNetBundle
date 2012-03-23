@@ -1,10 +1,10 @@
 <?php
 
-namespace Ms2474\AuthNetBundle\AuthorizeNet\Result;
+namespace Clamidity\AuthNetBundle\AuthorizeNet\Result;
 
-use Ms2474\AuthNetBundle\AuthorizeNet\Result\AuthorizeNetException;
+use Clamidity\AuthNetBundle\AuthorizeNet\Result\AuthorizeNetException;
 use Symfony\Component\DependencyInjection\ContainerAware;
-use Ms2474\AuthNetBundle\AuthorizeNet\Result\AuthorizeNetLogWriter;
+use Clamidity\AuthNetBundle\AuthorizeNet\Result\AuthorizeNetLogWriter;
 
 /**
  * @author Michael Shattuck <ms2474@gmail.com>

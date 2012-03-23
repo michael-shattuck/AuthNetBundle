@@ -1,11 +1,11 @@
 <?php
 
-namespace Ms2474\AuthNetBundle\Entity;
+namespace Clamidity\AuthNetBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Ms2474\AuthNetBundle\Entity\AuthNetProfile
+ * Clamidity\AuthNetBundle\Entity\AuthNetProfile
  *
  * @ORM\Table()
  * @ORM\Entity

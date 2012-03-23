@@ -1,6 +1,6 @@
 <?php
 
-namespace Ms2474\AuthNetBundle\AuthorizeNet\Shared;
+namespace Clamidity\AuthNetBundle\AuthorizeNet\Shared;
 
 /**
  * Sends requests to the Authorize.Net gateways.

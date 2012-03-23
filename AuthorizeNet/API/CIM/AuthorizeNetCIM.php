@@ -1,10 +1,10 @@
 <?php
 
-namespace Ms2474\AuthNetBundle\AuthorizeNet\API\CIM;
+namespace Clamidity\AuthNetBundle\AuthorizeNet\API\CIM;
 
-use Ms2474\AuthNetBundle\AuthorizeNet\Shared\AuthorizeNetRequest;
+use Clamidity\AuthNetBundle\AuthorizeNet\Shared\AuthorizeNetRequest;
 use Symfony\Component\DependencyInjection\SimpleXMLElement;
-use Ms2474\AuthNetBundle\AuthorizeNet\API\CIM\AuthorizeNetCIMResponse;
+use Clamidity\AuthNetBundle\AuthorizeNet\API\CIM\AuthorizeNetCIMResponse;
 
 /**
  * Easily interact with the Authorize.Net CIM XML API.

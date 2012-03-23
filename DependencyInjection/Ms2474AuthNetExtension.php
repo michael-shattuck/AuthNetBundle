@@ -1,6 +1,6 @@
 <?php
 
-namespace Ms2474\AuthNetBundle\DependencyInjection;
+namespace Clamidity\AuthNetBundle\DependencyInjection;
 
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -11,7 +11,7 @@ use Symfony\Component\Config\Definition\Processor;
 /**
  * @author Michael Shattuck <ms2474@gmail.com>
  */
-class Ms2474AuthNetExtension extends Extension
+class ClamidityAuthNetExtension extends Extension
 {
     public function load(array $configs, ContainerBuilder $container)
     {

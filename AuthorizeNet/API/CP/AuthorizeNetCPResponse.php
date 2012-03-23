@@ -1,8 +1,8 @@
 <?php
 
-namespace Ms2474\AuthNetBundle\AuthorizeNet\API\CP;
+namespace Clamidity\AuthNetBundle\AuthorizeNet\API\CP;
 
-use Ms2474\AuthNetBundle\AuthorizeNet\Shared\AuthorizeNetResponse;
+use Clamidity\AuthNetBundle\AuthorizeNet\Shared\AuthorizeNetResponse;
 
 /**
  * Parses an AuthorizeNet Card Present Response.
