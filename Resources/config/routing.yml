@@ -11,3 +11,7 @@ clamidity_authnet_customerprofile_post:
     defaults: { _controller: ClamidityAuthNetBundle:CustomerProfile:postIndividual }
     requirements:
         _method: POST
+
+clamidity_authnet_customerprofile_transaction_new:
+    pattern: /{id}/transaction/new
+    defaults: { _controller: ClamidityAuthNetBundle:CustomerProfile:newTransaction }

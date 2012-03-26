@@ -146,6 +146,26 @@ class CustomerProfile
         return $this->modified_at;
     }
 
+    public function addPaymentProfile(PaymentProfile $paymentProfile)
+    {
+        $this->paymentProfiles[] = $paymentProfile;
+    }
+
+    public function getPaymentProfiles()
+    {
+        return $this->paymentProfiles;
+    }
+
+    public function addShippingAddress(ShippingAddress $address)
+    {
+        $this->shippingAddresses[] = $address;
+    }
+
+    public function getShippingAddresses()
+    {
+        return $this->shippingAddresses;
+    }
+
     /**
      * @ORM\PreUpdate
      */

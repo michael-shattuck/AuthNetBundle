@@ -141,6 +141,7 @@ class ShippingAddress
     public function setCustomer($customer)
     {
         $this->customer = $customer;
+        $customer->addShippingAddress($this);
         return $this;
     }
 

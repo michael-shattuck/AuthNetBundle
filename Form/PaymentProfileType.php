@@ -13,7 +13,7 @@ class PaymentProfileType extends AbstractType
     public function buildForm(FormBuilder $builder, array $options)
     {
         $builder
-            ->add('cardnumber', 'number', array(
+            ->add('cardnumber', 'text', array(
                 'required' => true
             ))
             ->add('expirationyear', 'integer', array(
@@ -26,6 +26,9 @@ class PaymentProfileType extends AbstractType
 
         $builder
             ->addValidator(new CallbackValidator(function(FormInterface $form) {
+                if (!is_numeric($form["cardnumber"]->getData()) || strlen($form["cardnumber"]->getData()) < 14 || strlen($form["cardnumber"]->getData()) > 16) {
+                    $form->addError(new FormError('Invalid card number.'));
+                }
                 if ($form["expirationyear"]->getData() < date('Y')) {
                     $form->addError(new FormError('Invalid expiration year.'));
                 }

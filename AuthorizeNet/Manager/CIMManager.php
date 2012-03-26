@@ -14,11 +14,13 @@ class CIMManager extends AuthorizeNetResultHandler
 {
     protected $cimObject;
     protected $debugMode;
+    protected $manager;
 
-    public function __construct(AuthorizeNetCIM $cimObject, $debugMode)
+    public function __construct(AuthorizeNetCIM $cimObject, $debugMode, AuthorizeNetManager $manager)
     {
         $this->cimObject = $cimObject;
-        $this->debugMode - $debugMode;
+        $this->debugMode = $debugMode;
+        $this->manager = $manager;
     }
 
     public function getCIMObject()
@@ -26,8 +28,8 @@ class CIMManager extends AuthorizeNetResultHandler
         return $this->cimObject;
     }
 
-    public function addAddress(DataType\AuthorizeNetCustomer $customerProfile, array $customerAddressArray, AuthorizeNetManager $manager) {
-        $address = $manager->newAddress();
+    public function addAddress($customerProfileId, array $customerAddressArray) {
+        $address = $this->manager->newAddress();
 
         if (isset($customerAddressArray['firstname'])) { $address->firstName = $customerAddressArray['firstname']; }
         if (isset($customerAddressArray['lastname'])) { $address->lastName = $customerAddressArray['lastname']; }
@@ -40,27 +42,30 @@ class CIMManager extends AuthorizeNetResultHandler
         if (isset($customerAddressArray['phonenumber'])) { $address->phoneNumber = $customerAddressArray['phonenumber']; }
         if (isset($customerAddressArray['faxnumber'])) { $address->faxNumber = $customerAddressArray['faxnumber']; }
 
-        $customerProfile->shipToList[] = $address;
+        $response = $this->cimObject->createCustomerShippingAddress($customerProfileId, $address);
 
-        return $customerProfile;
+        return $response->getCustomerAddressId();
     }
 
-    public function addPaymentProfileIndividual(DataType\AuthorizeNetCustomer $customerProfile, array $customerPaymentProfileArray, AuthorizeNetManager $manager) {
-        $paymentProfile = $manager->newPaymentProfile();
+    public function addPaymentProfileIndividual($customerProfileId, array $customerPaymentProfileArray) {
+        $paymentProfile = $this->manager->newPaymentProfile();
 
         $paymentProfile->customerType = "individual";
         $paymentProfile->payment->creditCard->cardNumber = $customerPaymentProfileArray['cardnumber'];
         $paymentProfile->payment->creditCard->expirationDate = $customerPaymentProfileArray['expirationyear'].'-'.$customerPaymentProfileArray['expirationmonth'];
 
-        $customerProfile->paymentProfiles[] = $paymentProfile;
+        $response = $this->cimObject->createCustomerPaymentProfile($customerProfileId, $paymentProfile);
 
-        return $customerProfile;
+        return $response->getPaymentProfileId();
     }
 
     public function postCustomerProfile(DataType\AuthorizeNetCustomer $customerProfile)
     {
         if ($this->debugMode) {
             $response = $this->cimObject->createCustomerProfile($customerProfile, "testMode");
+            /**
+                       * @todo add testMode capture
+                       */
         } else {
             $response = $this->cimObject->createCustomerProfile($customerProfile);
         }

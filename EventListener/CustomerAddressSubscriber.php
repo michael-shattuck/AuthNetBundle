@@ -11,16 +11,18 @@ use Clamidity\AuthNetBundle\Entity\ShippingAddress;
 /**
  * @author Michael Shattuck <ms2474@gmail.com> 
  */
-class CustomerAddressSubscriber
+class CustomerAddressSubscriber implements EventSubscriberInterface
 {
     protected $em;
+    protected $securityContext;
 
-    public function __construct(EntityManager $em)
+    public function __construct($em, $securityContext)
     {
         $this->em = $em;
+        $this->securityContext = $securityContext;
     }
 
-    public function addAddress(CustomerAddressEvent $event)
+    public function addAddressToCustomerProfile(CustomerAddressEvent $event)
     {
         $customerProfile = $event->getCustomerProfile();
         $addressId = $event->getAddressId();
@@ -31,17 +33,12 @@ class CustomerAddressSubscriber
 
         $this->em->persist($address);
         $this->em->flush();
-
-        $customerProfile->addAddress($address);
-
-        $this->em->persist($customerProfile);
-        $this->em->flush();
     }
 
     public static function getSubscribedEvents()
     {
         return array(
-            Events::CUSTOMER_ADD_ADDRESS => 'addAddress',
+            Events::CUSTOMER_ADD_ADDRESS => 'addAddressToCustomerProfile',
         );
     }
 }

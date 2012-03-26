@@ -133,6 +133,29 @@ class PaymentProfile
     }
 
     /**
+     * Set customer
+     *
+     * @param CustomerProfile $customer
+     * @return PaymentProfile
+     */
+    public function setCustomer($customer)
+    {
+        $this->customer = $customer;
+        $customer->addPaymentProfile($this);
+        return $this;
+    }
+
+    /**
+     * Get customer
+     *
+     * @return PaymentProfile 
+     */
+    public function getCustomer()
+    {
+        return $this->customer;
+    }
+
+    /**
      * @ORM\PreUpdate
      */
     public function doStuffOnPreUpdate()

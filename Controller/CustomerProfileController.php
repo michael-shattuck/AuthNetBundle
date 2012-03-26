@@ -4,8 +4,10 @@ namespace Clamidity\AuthNetBundle\Controller;
 
 use Symfony\Component\DependencyInjection\ContainerAware;
 use Clamidity\AuthNetBundle\Entity\CustomerProfile;
-use Clamidity\AuthNetBundle\Form\CIM\CustomerProfileIndividualType;
+use Clamidity\AuthNetBundle\Form\CustomerProfileIndividualType;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Clamidity\AuthNetBundle\Event\CustomerAddressEvent;
+use Clamidity\AuthNetBundle\Event\CustomerPaymentProfileEvent;
 
 class CustomerProfileController extends ContainerAware
 {
@@ -45,34 +47,29 @@ class CustomerProfileController extends ContainerAware
         if ($form->isValid()) {
             $customerProfileArray = $request->get('clamidity_authnetbundle_customerprofileindividualtype');
 
-            $manager = $this->getAuthorizeNetManager();
-            $customerProfile = $this->getCustomerProfileObject($manager);
+            $customerProfile = $this->getCustomerProfileObject();
             $customerProfile->description = $customerProfileArray['customerdescription'];
             $customerProfile->email = $customerProfileArray['email'];
-            /**
-                    * @todo Add support for user set merchant customer id
-                    */
-            $customerProfile->merchantCustomerId = time();
+            $customerProfile->merchantCustomerId = time(); /** @todo: add support for merchant customer id*/
 
-            $CIMManager = $manager->getCIMManager();
-
-            if ($customerProfileArray['paymentprofile']) {
-                $customerProfile = $CIMManager->addPaymentProfileIndividual($customerProfile, $customerProfileArray['paymentprofile'], $manager);
-            }
-
-            if ($customerProfileArray['shippingaddress']) {
-                $customerProfile = $CIMManager->addAddress($customerProfile, $customerProfileArray['shippingaddress'], $manager);
-            }
-
+            $CIMManager = $this->getCIMManager();
             $customerProfileId = $CIMManager->postCustomerProfile($customerProfile);
 
             if ($customerProfileId) {
-                $CustomerProfile = new CustomerProfile();
-                $CustomerProfile->setProfileId($customerProfileId);
+                $customerProfileEntity = new CustomerProfile();
+                $customerProfileEntity->setProfileId($customerProfileId);
 
                 $em = $this->container->get('doctrine')->getEntityManager();
-                $em->persist($CustomerProfile);
+                $em->persist($customerProfileEntity);
                 $em->flush();
+
+                if ($customerProfileArray['paymentprofile']) {
+                    $this->addPaymentProfile($customerProfileEntity, $customerProfileArray['paymentprofile']);
+                }
+
+                if ($customerProfileArray['shippingaddress']) {
+                    $this->addShippingAddress($customerProfileEntity, $customerProfileArray['shippingaddress']);
+                }
             }
 
             $uri = $this->container->get('router')->generate(
@@ -94,22 +91,26 @@ class CustomerProfileController extends ContainerAware
         );
     }
 
-    public function deleteCustomerProfileAction()
+    private function addShippingAddress(CustomerProfile $customerProfile, array $addressArray)
     {
-        
+        $addressId = $this->getCIMManager()->addAddress($customerProfile->getProfileId(), $addressArray);
+        $this->container->get('event_dispatcher')->dispatch(
+            'clamidity_authnet.customer.add_address', 
+            new CustomerAddressEvent($customerProfile, $addressId)
+        );
     }
 
-    public function updateCustomerProfile()
+    private function addPaymentProfile(CustomerProfile $customerProfile, array $paymentProfileArrays)
     {
-        
+        $paymentProfileId = $this->getCIMManager()->addPaymentProfileIndividual($customerProfile->getProfileId(), $paymentProfileArrays);
+        $this->container->get('event_dispatcher')->dispatch(
+            'clamidity_authnet.customer.add_paymentprofile',
+            new CustomerPaymentProfileEvent($customerProfile, $paymentProfileId)
+        );
     }
 
-    public function updatePaymentProfile()
-    {
-        
-    }
 
-    public function newTransaction()
+    public function newTransactionAction()
     {
         return $this->container->get('templating')->renderResponse(
             'ClamidityAuthNetBundle:CustomerProfile:index.html.twig', array(
@@ -117,18 +118,32 @@ class CustomerProfileController extends ContainerAware
             )
         );
     }
-
-    public function postTransaction()
-    {
-        $this->getCIMManager()->createNewTransaction($amount, $customerProfileId, $lineItems, $paymentProfileId, $customerAddressId);
-    }
-    
-    public function voidTransaction()
+    private function deleteCustomerProfileAction()
     {
         
     }
 
-    public function deleteShippingAddress()
+    private function updateCustomerProfile()
+    {
+        
+    }
+
+    private function updatePaymentProfile()
+    {
+        
+    }
+
+    private function postTransaction()
+    {
+        $this->getCIMManager()->createNewTransaction($amount, $customerProfileId, $lineItems, $paymentProfileId, $customerAddressId);
+    }
+    
+    private function voidTransaction()
+    {
+        
+    }
+
+    private function deleteShippingAddress()
     {
         
     }
@@ -168,9 +183,9 @@ class CustomerProfileController extends ContainerAware
         return $this->container->get('form.factory');
     }
 
-    private function getCustomerProfileObject(\Clamidity\AuthNetBundle\AuthorizeNet\AuthorizeNetManager $manager)
+    private function getCustomerProfileObject()
     {
-        $customerProfile = $manager->newCustomer();
+        $customerProfile = $this->getAuthorizeNetManager()->newCustomer();
         return $customerProfile;
     }
 }
