@@ -7,7 +7,7 @@ use Symfony\Component\DependencyInjection\ContainerAware;
 use Clamidity\AuthNetBundle\AuthorizeNet\Result\AuthorizeNetLogWriter;
 
 /**
- * @author Michael Shattuck <clamidity@gmail.com>
+ * @author Michael Shattuck <ms2474@gmail.com>
  */
 class AuthorizeNetResultHandler extends ContainerAware
 {

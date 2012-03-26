@@ -50,6 +50,13 @@ class ShippingAddress
      */
     protected $customer;
 
+    /**
+     * @var type string
+     * 
+     * @ORM\Column(name="address", type="string", length=100) 
+     */
+    protected $address;
+
     public function __construct()
     {
         $this->created_at = new \DateTime();
@@ -153,6 +160,16 @@ class ShippingAddress
     public function getCustomer()
     {
         return $this->customer;
+    }
+
+    public function setAddress($address)
+    {
+        $this->address = $address;
+    }
+
+    public function getAddress()
+    {
+        return $this->address;
     }
 
     /**

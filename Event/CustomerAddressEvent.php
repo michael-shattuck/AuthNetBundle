@@ -12,11 +12,13 @@ class CustomerAddressEvent extends Event
 {
     protected $customerProfile;
     protected $addressId;
+    protected $address;
 
-    public function __construct(CustomerProfile $customerProfile, $addressId)
+    public function __construct(CustomerProfile $customerProfile, $addressId, $address)
     {
         $this->customerProfile = $customerProfile;
         $this->addressId = $addressId;
+        $this->address = $address;
     }
 
     /**
@@ -30,5 +32,10 @@ class CustomerAddressEvent extends Event
     public function getAddressId()
     {
         return $this->addressId;
+    }
+
+    public function getAddress()
+    {
+        return $this->address;
     }
 }

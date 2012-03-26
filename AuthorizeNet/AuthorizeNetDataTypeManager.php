@@ -13,7 +13,7 @@ use Clamidity\AuthNetBundle\AuthorizeNet\Shared\DataType\AuthorizeNetTransaction
 use Clamidity\AuthNetBundle\AuthorizeNet\Shared\DataType\AuthorizeNet_Subscription;
 
 /**
- * @author Michael Shattuck <clamidity@gmail.com>
+ * @author Michael Shattuck <ms2474@gmail.com>
  */
 class AuthorizeNetDataTypeManager
 {

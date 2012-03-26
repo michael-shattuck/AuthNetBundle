@@ -8,7 +8,7 @@ use Clamidity\AuthNetBundle\AuthorizeNet\Shared\DataType;
 use Clamidity\AuthNetBundle\AuthorizeNet\Result\AuthorizeNetResultHandler;
 
 /**
- * @author Michael Shattuck <clamidity@gmail.com>
+ * @author Michael Shattuck <ms2474@gmail.com>
  */
 class CIMManager extends AuthorizeNetResultHandler
 {
@@ -53,6 +53,16 @@ class CIMManager extends AuthorizeNetResultHandler
         $paymentProfile->customerType = "individual";
         $paymentProfile->payment->creditCard->cardNumber = $customerPaymentProfileArray['cardnumber'];
         $paymentProfile->payment->creditCard->expirationDate = $customerPaymentProfileArray['expirationyear'].'-'.$customerPaymentProfileArray['expirationmonth'];
+        if (isset($customerPaymentProfileArray['billingaddress']['firstname'])) { $paymentProfile->billTo->firstName = $customerPaymentProfileArray['billingaddress']['firstname']; }
+        if (isset($customerPaymentProfileArray['billingaddress']['lastname'])) { $paymentProfile->billTo->lastName = $customerPaymentProfileArray['billingaddress']['lastname']; }
+        if (isset($customerPaymentProfileArray['billingaddress']['company'])) { $paymentProfile->billTo->company = $customerPaymentProfileArray['billingaddress']['company']; }
+        if (isset($customerPaymentProfileArray['billingaddress']['address'])) { $paymentProfile->billTo->address = $customerPaymentProfileArray['billingaddress']['address']; }
+        if (isset($customerPaymentProfileArray['billingaddress']['city'])) { $paymentProfile->billTo->city = $customerPaymentProfileArray['billingaddress']['city']; }
+        if (isset($customerPaymentProfileArray['billingaddress']['state'])) { $paymentProfile->billTo->state = $customerPaymentProfileArray['billingaddress']['state']; }
+        if (isset($customerPaymentProfileArray['billingaddress']['zip'])) { $paymentProfile->billTo->zip = $customerPaymentProfileArray['billingaddress']['zip']; }
+        if (isset($customerPaymentProfileArray['billingaddress']['country'])) { $paymentProfile->billTo->country = $customerPaymentProfileArray['billingaddress']['country']; }
+        if (isset($customerPaymentProfileArray['billingaddress']['phonenumber'])) { $paymentProfile->billTo->phoneNumber = $customerPaymentProfileArray['billingaddress']['phonenumber']; }
+        if (isset($customerPaymentProfileArray['billingaddress']['faxnumber'])) { $paymentProfile->billTo->faxNumber = $customerPaymentProfileArray['billingaddress']['faxnumber']; }
 
         $response = $this->cimObject->createCustomerPaymentProfile($customerProfileId, $paymentProfile);
 

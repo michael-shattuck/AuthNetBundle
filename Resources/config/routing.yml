@@ -12,6 +12,22 @@ clamidity_authnet_customerprofile_post:
     requirements:
         _method: POST
 
+clamidity_authnet_customerprofile_addshippingaddress:
+    pattern: /{id}/add_shipping_address
+    defaults: { _controller: ClamidityAuthNetBundle:CustomerProfile:addShippingAddress }
+
+clamidity_authnet_customerprofile_postshippingaddress:
+    pattern: /{id}/post_shipping_address
+    defaults: { _controller: ClamidityAuthNetBundle:CustomerProfile:postShippingAddress }
+    requirements:
+        _method: POST
+
 clamidity_authnet_customerprofile_transaction_new:
     pattern: /{id}/transaction/new
     defaults: { _controller: ClamidityAuthNetBundle:CustomerProfile:newTransaction }
+
+clamidity_authnet_customerprofile_transaction_post:
+    pattern: /{id}/transaction/new
+    defaults: { _controller: ClamidityAuthNetBundle:CustomerProfile:newTransaction }
+    requirements:
+        _method: POST

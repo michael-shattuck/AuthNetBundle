@@ -12,11 +12,13 @@ class CustomerPaymentProfileEvent extends Event
 {
     protected $customerProfile;
     protected $paymentProfileId;
+    protected $accountNumber;
 
-    public function __construct(CustomerProfile $customerProfile, $paymentProfileId)
+    public function __construct(CustomerProfile $customerProfile, $paymentProfileId, $accountNumber)
     {
         $this->customerProfile = $customerProfile;
         $this->paymentProfileId = $paymentProfileId;
+        $this->accountNumber = $accountNumber;
     }
 
     /**
@@ -30,5 +32,10 @@ class CustomerPaymentProfileEvent extends Event
     public function getPaymentProfileId()
     {
         return $this->paymentProfileId;
+    }
+
+    public function getAccountNumber()
+    {
+        return $this->accountNumber;
     }
 }

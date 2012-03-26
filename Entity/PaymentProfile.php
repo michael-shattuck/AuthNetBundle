@@ -50,6 +50,13 @@ class PaymentProfile
      */
     protected $customer;
 
+    /**
+     * @var type  string
+     * 
+     * @ORM\Column(name="accountNumber", type="string", length=20) 
+     */
+    protected $accountNumber;
+
     public function __construct()
     {
         $this->created_at = new \DateTime();
@@ -72,7 +79,7 @@ class PaymentProfile
      * @param string $paymentProfileId
      * @return PaymentProfile
      */
-    public function setPaymemtProfileId($paymentProfileId)
+    public function setPaymentProfileId($paymentProfileId)
     {
         $this->paymentProfileId = $paymentProfileId;
         return $this;
@@ -83,7 +90,7 @@ class PaymentProfile
      *
      * @return string 
      */
-    public function getPaymemtProfileId()
+    public function getPaymentProfileId()
     {
         return $this->paymentProfileId;
     }
@@ -153,6 +160,16 @@ class PaymentProfile
     public function getCustomer()
     {
         return $this->customer;
+    }
+
+    public function setAccountNumber($accountNumber)
+    {
+        $this->accountNumber = $accountNumber;
+    }
+
+    public function getAccountNumber()
+    {
+        return $this->accountNumber;
     }
 
     /**

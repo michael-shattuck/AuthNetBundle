@@ -19,7 +19,6 @@ class CustomerProfileIndividualType extends AbstractType
             ->add('type', 'hidden', array(
                 'data' => 'individual',
             ))
-            ->add('shippingaddress', new ShippingAddressType())
             ->add('paymentprofile', new PaymentProfileType())
         ;
     }

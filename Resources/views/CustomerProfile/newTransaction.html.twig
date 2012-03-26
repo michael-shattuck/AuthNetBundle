@@ -1,0 +1,13 @@
+{% extends 'ClamidityAuthNetBundle::layout.html.twig' %}
+
+{% form_theme form 'ClamidityAuthNetBundle::form.html.twig' %}
+
+{% block clamidity_authnet_content %}
+<form action="{{ path('clamidity_authnet_customerprofile_post') }}" method="post" {{ form_enctype(form) }}>
+    {{ form_widget(form) }}
+
+    <p>
+        <button type="submit">Submit</button>
+    </p>
+</form>
+{% endblock clamidity_authnet_content %}

@@ -26,10 +26,12 @@ class CustomerAddressSubscriber implements EventSubscriberInterface
     {
         $customerProfile = $event->getCustomerProfile();
         $addressId = $event->getAddressId();
+        $addressString = $event->getAddress();
 
         $address = new ShippingAddress();
         $address->setCustomer($customerProfile);
         $address->setShippingAddressId($addressId);
+        $address->setAddress($addressString);
 
         $this->em->persist($address);
         $this->em->flush();

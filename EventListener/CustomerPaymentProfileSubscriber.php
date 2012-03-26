@@ -26,10 +26,12 @@ class CustomerPaymentProfileSubscriber implements EventSubscriberInterface
     {
         $customerProfile = $event->getCustomerProfile();
         $paymentProfileId = $event->getPaymentProfileId();
+        $accountNumber = $event->getAccountNumber();
 
         $paymentProfile = new PaymentProfile();
         $paymentProfile->setCustomer($customerProfile);
-        $paymentProfile->setPaymemtProfileId($paymentProfileId);
+        $paymentProfile->setPaymentProfileId($paymentProfileId);
+        $paymentProfile->setAccountNumber($accountNumber);
 
         $this->em->persist($paymentProfile);
         $this->em->flush();
