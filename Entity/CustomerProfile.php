@@ -166,6 +166,16 @@ class CustomerProfile
         return $this->shippingAddresses;
     }
 
+    public function addTransaction(Transaction $transaction)
+    {
+        $this->transactions[] = $transaction;
+    }
+
+    public function getTransactions()
+    {
+        return $this->transactions;
+    }
+
     /**
      * @ORM\PreUpdate
      */

@@ -3,6 +3,7 @@
 namespace Clamidity\AuthNetBundle\AuthorizeNet\API\CIM;
 
 use Clamidity\AuthNetBundle\AuthorizeNet\Shared\AuthorizeNetXMLResponse;
+use Clamidity\AuthNetBundle\AuthorizeNet\API\AIM\AuthorizeNetAIMResponse;
 
 /**
  * A class to parse a response from the CIM XML API.
@@ -17,7 +18,7 @@ class AuthorizeNetCIMResponse extends AuthorizeNetXMLResponse
      */
     public function getTransactionResponse()
     {
-        return new AuthorizeNetAIM_Response($this->_getElementContents("directResponse"), ",", "", array());
+        return new AuthorizeNetAIMResponse($this->_getElementContents("directResponse"), ",", "", array());
     }
     
     /**
@@ -28,7 +29,7 @@ class AuthorizeNetCIMResponse extends AuthorizeNetXMLResponse
         $responses = (array)$this->xml->validationDirectResponseList;
         $return = array();
         foreach ((array)$responses["string"] as $response) {
-            $return[] = new AuthorizeNetAIM_Response($response, ",", "", array());
+            $return[] = new AuthorizeNetAIMResponse($response, ",", "", array());
         }
         return $return;
     }
@@ -38,7 +39,7 @@ class AuthorizeNetCIMResponse extends AuthorizeNetXMLResponse
      */
     public function getValidationResponse()
     {
-        return new AuthorizeNetAIM_Response($this->_getElementContents("validationDirectResponse"), ",", "", array());
+        return new AuthorizeNetAIMResponse($this->_getElementContents("validationDirectResponse"), ",", "", array());
     }
     
     /**

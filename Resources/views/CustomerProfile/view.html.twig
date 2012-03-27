@@ -1,0 +1,33 @@
+{% extends 'ClamidityAuthNetBundle::layout.html.twig' %}
+
+{% block clamidity_authnet_content %}
+    <h1>Customer Profile: {{ customerProfile.id }}</h1>
+    <div>created_at: {{ customerProfile.createdAt| date('m/d/Y') }}</div>
+
+    <div>
+        <h3>Payment Profiles</h3>
+        {% for paymentProfile in customerProfile.paymentProfiles %}
+            <p>{{ paymentProfile.paymentProfileId }}: {{ paymentProfile.accountNumber }}</p>
+        {% endfor %}
+    </div><br />
+
+    <div>
+        <h3>Shipping Addresses</h3>
+        <a href="{{ path('clamidity_authnet_customerprofile_addshippingaddress', {id:customerProfile.id}) }}">Add new shipping address</a>
+        {% for address in customerProfile.shippingAddresses %}
+            <p>{{ address.shippingAddressId }}: {{ address.address }}</p>
+        {% endfor %}
+    </div><br />
+
+    <div>
+        <h3>Transactions</h3>
+        {% if customerProfile.shippingAddresses[0] != NULL %}
+        <a href="{{ path('clamidity_authnet_customerprofile_transaction_new', {id:customerProfile.id}) }}">New Transaction</a>
+        {% else %}
+        <a href="{{ path('clamidity_authnet_customerprofile_addshippingaddress', {id:customerProfile.id}) }}">Please add a shipping address before creating a transaction.</a>
+        {% endif %}
+        {% for transaction in customerProfile.transactions %}
+            <p>{{ transaction.transactionId }}: ${{transaction.amount}}</p>
+        {% endfor %}
+    </div>
+{% endblock %}

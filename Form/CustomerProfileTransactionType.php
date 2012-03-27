@@ -22,10 +22,7 @@ class CustomerProfileTransactionType extends AbstractType
     {
         $customerId = $this->customerId;
         $builder
-            ->add('amount', 'money', array(
-                'required' => true,
-                'currency' => 'USD'
-            ))
+            ->add('lineItem', new TransactionLineItemType())
             ->add('addressProfile', 'entity', array(
                 'class' => 'ClamidityAuthNetBundle:ShippingAddress',
                 'property' => 'address',
@@ -65,6 +62,6 @@ class CustomerProfileTransactionType extends AbstractType
 
     public function getName()
     {
-        return 'clamidity_authnetbundle_cimtransactiontype_';
+        return 'clamidity_authnetbundle_cimtransactiontype';
     }
 }

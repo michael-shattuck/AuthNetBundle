@@ -50,6 +50,13 @@ class Transaction
      */
     protected $customer;
 
+    /**
+     * @var string $amount
+     * 
+     * @ORM\Column(name="amount", type="string", length=10) 
+     */
+    protected $amount;
+
     public function __construct()
     {
         $this->created_at = new \DateTime();
@@ -130,6 +137,26 @@ class Transaction
     public function getModifiedAt()
     {
         return $this->modified_at;
+    }
+
+    public function setCustomer(CustomerProfile $customer)
+    {
+        $this->customer = $customer;
+    }
+
+    public function getCustomer()
+    {
+        return $customer;
+    }
+
+    public function setAmount($amount)
+    {
+        $this->amount = $amount;
+    }
+
+    public function getAmount()
+    {
+        return $this->amount;
     }
 
     /**

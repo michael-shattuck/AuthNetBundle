@@ -3,8 +3,9 @@
 {% block clamidity_authnet_content %}
 <div>
     <h1>Authorize.Net Profile Id's</h1>
-    {% for id in ids %}
-        {{ id.profileId }}
+    <a href="{{ path('clamidity_authnet_customerprofile_new_individual') }}">New Individual Customer Profile</a>
+    {% for customerProfile in customerProfiles %}
+        <a href="{{ path('clamidity_authnet_customerprofile_view', {id:customerProfile.id}) }}">{{ customerProfile.profileId }}</a>
         <br />
     {% endfor %}
 </div>

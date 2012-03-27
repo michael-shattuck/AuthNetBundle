@@ -27,3 +27,10 @@ services:
             securityContext: "@security.context"
         tags:
             - { name: kernel.event_subscriber }
+    clamidity_authnet.customer.add_transaction_subscriber:
+        class: Clamidity\AuthNetBundle\EventListener\CustomerTransactionSubscriber
+        arguments:
+            em: "@doctrine.orm.entity_manager"
+            securityContext: "@security.context"
+        tags:
+            - { name: kernel.event_subscriber }

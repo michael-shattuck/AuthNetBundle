@@ -2,6 +2,10 @@ clamidity_authnet_customerprofile_index:
     pattern: /
     defaults: { _controller: ClamidityAuthNetBundle:CustomerProfile:index }
 
+clamidity_authnet_customerprofile_view:
+    pattern: /{id}
+    defaults: { _controller: ClamidityAuthNetBundle:CustomerProfile:view }
+
 clamidity_authnet_customerprofile_new_individual:
     pattern: /new/individual
     defaults: { _controller: ClamidityAuthNetBundle:CustomerProfile:newIndividual }
@@ -27,7 +31,7 @@ clamidity_authnet_customerprofile_transaction_new:
     defaults: { _controller: ClamidityAuthNetBundle:CustomerProfile:newTransaction }
 
 clamidity_authnet_customerprofile_transaction_post:
-    pattern: /{id}/transaction/new
-    defaults: { _controller: ClamidityAuthNetBundle:CustomerProfile:newTransaction }
+    pattern: /{id}/transaction/post
+    defaults: { _controller: ClamidityAuthNetBundle:CustomerProfile:postTransaction }
     requirements:
         _method: POST

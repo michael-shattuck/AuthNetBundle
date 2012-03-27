@@ -104,13 +104,20 @@ class CIMManager extends AuthorizeNetResultHandler
             $lineItem->description = $lineItemArray['description'];
             $lineItem->quantity    = $lineItemArray['quantity'];
             $lineItem->unitPrice   = $lineItemArray['unitPrice'];
-            $lineItem->taxable     = $lineItemArray['taxable'];
+            if (isset($lineItemArray['taxable']) && 1 == $lineItemArray['taxable']) {
+                $lineItem->taxable = true;
+            }
 
             $transaction->lineItems[] = $lineItem;
         }
 
         $response = $this->getCIMObject()->createCustomerProfileTransaction("AuthCapture", $transaction);
         $transactionResponse = $response->getTransactionResponse();
+
+        if (!$this->checkResult($response)) {
+            return false;
+        }
+
         return $transactionResponse->transaction_id;
     }
 }

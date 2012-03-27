@@ -20,11 +20,11 @@ class AuthorizeNetResultHandler extends ContainerAware
 
     public function checkResult($response)
     {
-        $result = $response->xml->messages->resultCode;
+        $result = strip_tags($response->xml->messages->resultCode->asXML());
 
-        if (!$result || $result === 'Error') {
-            if ($this->debugMode) {
-                throw new AuthorizeNetException($response->xml->messages->message->code.': "'.$response->xml->messages->message->text.'"\n');
+        if (!$result || $result == 'Error') {
+            if (!$this->debugMode) {
+                throw new AuthorizeNetException($response->xml->messages->message->code.': "'.$response->xml->messages->message->text);
             } else {
                 $logObject = new AuthorizeNetLogWriter();
                 $logObject->writeException($response->xml->messages->message->code.': "'.$response->xml->messages->message->text.'"\n');

@@ -9,4 +9,5 @@ class Events
 {
     const CUSTOMER_ADD_ADDRESS  = 'clamidity_authnet.customer.add_address';
     const CUSTOMER_ADD_PAYMENTPROFILE = 'clamidity_authnet.customer.add_paymentprofile';
+    const CUSTOMER_ADD_TRANSACTION = 'clamidity_authnet.customer.add_transaction';
 }
