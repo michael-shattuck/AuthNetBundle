@@ -35,3 +35,9 @@ clamidity_authnet_customerprofile_transaction_post:
     defaults: { _controller: ClamidityAuthNetBundle:CustomerProfile:postTransaction }
     requirements:
         _method: POST
+
+clamidity_authnet_customerprofile_delete:
+    pattern: /{id}/delete
+    defaults: { _controller: ClamidityAuthNetBundle:CustomerProfile:delete }
+    requirements:
+        _method: POST

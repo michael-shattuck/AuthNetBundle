@@ -5,6 +5,16 @@
     <div>created_at: {{ customerProfile.createdAt| date('m/d/Y') }}</div>
 
     <div>
+        <form action="{{ path('clamidity_authnet_customerprofile_delete', {id:customerProfile.id}) }}" method="post" {{ form_enctype(deleteForm) }}>
+            {{ form_widget(deleteForm) }}
+
+            <p>
+                <button type="submit">Delete</button>
+            </p>
+        </form>
+    </div>
+
+    <div>
         <h3>Payment Profiles</h3>
         {% for paymentProfile in customerProfile.paymentProfiles %}
             <p>{{ paymentProfile.paymentProfileId }}: {{ paymentProfile.accountNumber }}</p>

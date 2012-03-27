@@ -19,7 +19,7 @@ class CustomerProfileController extends AuthNetBaseController
 
     public function indexAction()
     {
-        $profileIdArray = $this->getRepository('CustomerProfile')->findAll();
+        $profileIdArray = $this->getCustomerProfileManager()->findAll();
 
         return $this->container->get('templating')->renderResponse(
             Entities::CUSTOMER_PROFILE_CLASS.':index.html.twig', array(
@@ -30,12 +30,14 @@ class CustomerProfileController extends AuthNetBaseController
 
     public function viewAction($id)
     {
-        $customerProfile = $this->getRepository('CustomerProfile')->find($id);
+        $customerProfile = $this->getCustomerProfileManager()->findOr404($id);
+        $deleteForm = $this->createDeleteForm($id);
 
         return $this->render(
             Entities::CUSTOMER_PROFILE_CLASS.':view.html.twig',
             array(
-                'customerProfile' => $customerProfile
+                'customerProfile' => $customerProfile,
+                'deleteForm'      => $deleteForm->createView()
             )
         );
     }
@@ -132,14 +134,10 @@ class CustomerProfileController extends AuthNetBaseController
 
         if ($form->isValid()) {
             $addressArray = $request->get('clamidity_authnetbundle_customerprofileaddresstype');
-            $customerProfile = $this->getRepository('CustomerProfile')->find($id);
+            $customerProfile = $this->getCustomerProfileManager()->findOr404($id);
             $this->addShippingAddress($customerProfile, $addressArray);
 
-            $uri = $this->generateUrl(
-                'clamidity_authnet_customerprofile_index'
-            );
-
-            return new RedirectResponse($uri);
+            return new RedirectResponse($this->generateUrl('clamidity_authnet_customerprofile_index'));
         }
 
         return $this->render(
@@ -153,7 +151,7 @@ class CustomerProfileController extends AuthNetBaseController
 
     public function newTransactionAction($id)
     {
-        $customerProfile = $this->getRepository('CustomerProfile')->find($id);
+        $customerProfile = $this->getCustomerProfileManager()->findOr404($id);
         $form = $this->createForm(new CustomerProfileTransactionType($id));
 
         return $this->render(
@@ -176,7 +174,7 @@ class CustomerProfileController extends AuthNetBaseController
             $transaction = array();
             $transactionArray = $request->get('clamidity_authnetbundle_cimtransactiontype');
 
-            $customerProfile = $this->getRepository('CustomerProfile')->find($id);
+            $customerProfile = $this->getCustomerProfileManager()->findOr404($id);
             $lineItems = array($transactionArray['lineItem']);
             $amount = $transactionArray['lineItem']['unitPrice'] * $transactionArray['lineItem']['quantity'];
 
@@ -206,6 +204,23 @@ class CustomerProfileController extends AuthNetBaseController
         );
     }
 
+    public function deleteCustomerProfileAction($id)
+    {
+        $request = $this->getRequest();
+
+        $form = $this->createDeleteForm($id);
+        $form->bindRequest($request);
+
+        if ($form->isValid()) {
+            $customerProfile = $this->getCustomerProfileManager()->findOr404($id);
+            if ($this->getCIMManager()->deleteCustomerProfile($customerProfile->getProfileId())) {
+                $this->getCustomerProfileManager()->removeCustomerProfile($customerProfile);
+            }
+        }
+
+        return new RedirectResponse($this->generateUrl('clamidity_authnet_customerprofile_index'));
+    }
+
     private function addShippingAddress(CustomerProfile $customerProfile, array $addressArray)
     {
         $addressId = $this->getCIMManager()->addAddress($customerProfile->getProfileId(), $addressArray);
@@ -229,11 +244,6 @@ class CustomerProfileController extends AuthNetBaseController
                              $transaction['shippingAddressId']
                          );
         $this->getCustomerProfileManager()->addTransaction($customerProfile, $transactionId, $transaction['amount']);
-    }
-
-    private function deleteCustomerProfileAction()
-    {
-        
     }
 
     private function updateCustomerProfile()

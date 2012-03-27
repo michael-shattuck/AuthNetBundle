@@ -128,4 +128,15 @@ class CIMManager extends AuthorizeNetResultHandler
 
         return $transactionResponse->transaction_id;
     }
+
+    public function deleteCustomerProfile()
+    {
+        $this->getCIMObject()->deleteCustomerProfile($customer_id);
+
+        if (!$this->checkResult($response)) {
+            return false;
+        }
+
+        return true;
+    }
 }

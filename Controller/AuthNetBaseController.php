@@ -71,4 +71,15 @@ class AuthNetBaseController extends ContainerAware
     {
         return $this->getRouter()->generate($route, $options);
     }
+
+    protected function createFormBuilder($data = null, array $options = array())
+    {
+        return $this->getFormFactory()->createBuilder('form', $data, $options);
+    }
+
+    protected function createDeleteForm($id) {
+        return $this->createFormBuilder(array('id' => $id))
+            ->getForm()
+        ;
+    }
 }
