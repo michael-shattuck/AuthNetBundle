@@ -3,7 +3,7 @@
 {% form_theme form 'ClamidityAuthNetBundle::form.html.twig' %}
 
 {% block clamidity_authnet_content %}
-<form action="{{ path('clamidity_authnet_customerprofile_post') }}" method="post" {{ form_enctype(form) }}>
+<form action="{{ path('clamidity_authnet_customerprofile_post_individual') }}" method="post" {{ form_enctype(form) }}>
     {{ form_widget(form) }}
 
     <p>

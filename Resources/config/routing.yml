@@ -10,8 +10,8 @@ clamidity_authnet_customerprofile_new_individual:
     pattern: /new/individual
     defaults: { _controller: ClamidityAuthNetBundle:CustomerProfile:newIndividual }
 
-clamidity_authnet_customerprofile_post:
-    pattern: /post
+clamidity_authnet_customerprofile_post_individual:
+    pattern: /post/individual
     defaults: { _controller: ClamidityAuthNetBundle:CustomerProfile:postIndividual }
     requirements:
         _method: POST

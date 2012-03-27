@@ -44,6 +44,10 @@ class CIMManager extends AuthorizeNetResultHandler
 
         $response = $this->cimObject->createCustomerShippingAddress($customerProfileId, $address);
 
+        if (!$this->checkResult($response)) {
+            return false;
+        }
+
         return $response->getCustomerAddressId();
     }
 
@@ -65,6 +69,10 @@ class CIMManager extends AuthorizeNetResultHandler
         if (isset($customerPaymentProfileArray['billingaddress']['faxnumber'])) { $paymentProfile->billTo->faxNumber = $customerPaymentProfileArray['billingaddress']['faxnumber']; }
 
         $response = $this->cimObject->createCustomerPaymentProfile($customerProfileId, $paymentProfile);
+
+        if (!$this->checkResult($response)) {
+            return false;
+        }
 
         return $response->getPaymentProfileId();
     }

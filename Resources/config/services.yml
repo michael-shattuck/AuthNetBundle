@@ -1,9 +1,11 @@
 parameters:
     authorize_net.manager.class: Clamidity\AuthNetBundle\AuthorizeNet\AuthorizeNetManager
     authorize_net.factory.class: Clamidity\AuthNetBundle\AuthorizeNet\AuthorizeNetFactory
+
 services:
     authorize_net.factory:
         class: %authorize_net.factory.class%
+
     authorize_net.manager:
         class: %authorize_net.manager.class%
         factory_service: authorize_net.factory
@@ -13,6 +15,13 @@ services:
             transaction_key: %authorize_net.transaction_key%
             sandbox: %authorize_net.sandbox%
             log_file: %authorize_net.log_file%
+    clamidity_authnet.customer.manager:
+        class: Clamidity\AuthNetBundle\Entity\CustomerProfileManager
+        arguments:
+            dispatcher: "@event_dispatcher"
+            em: "@doctrine.orm.entity_manager"
+            class: Clamidity\AuthNetBundle\Entity\CustomerProfile
+
     clamidity_authnet.customer.add_address_subscriber:
         class: Clamidity\AuthNetBundle\EventListener\CustomerAddressSubscriber
         arguments:
