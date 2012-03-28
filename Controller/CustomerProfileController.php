@@ -256,12 +256,22 @@ class CustomerProfileController extends AuthNetBaseController
         
     }
 
+    private function updateShippingAddress()
+    {
+        
+    }
+
     private function voidTransaction()
     {
         
     }
 
-    private function deleteShippingAddress()
+    private function removeShippingAddress()
+    {
+        
+    }
+
+    private function removePaymentProfile()
     {
         
     }

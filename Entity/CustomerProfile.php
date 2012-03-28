@@ -3,6 +3,7 @@
 namespace Clamidity\AuthNetBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Clamidity\AuthNetBundle\Entity\AuthNetProfile
@@ -68,6 +69,9 @@ class CustomerProfile
     {
         $this->created_at = new \DateTime();
         $this->modified_at = new \DateTime();
+        $this->paymentProfiles = new ArrayCollection();
+        $this->shippingAddresses = new ArrayCollection();
+        $this->transactions = new ArrayCollection();
     }
 
     /**

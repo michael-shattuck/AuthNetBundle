@@ -55,6 +55,25 @@ class CustomerProfileManager extends AbstractCustomerProfileManager
 
     protected function doRemoveCustomerProfile(CustomerProfile $customerProfile)
     {
+        $transactions = $customerProfile->getTransactions();
+        $paymentProfiles = $customerProfile->getPaymentProfiles();
+        $shippingAddresses = $customerProfile->getShippingAddresses();
+
+        foreach ($transactions as $transaction) {
+            $this->em->remove($transaction);
+            $this->em->flush();
+        }
+
+        foreach ($paymentProfiles as $paymentProfile) {
+            $this->em->remove($paymentProfile);
+            $this->em->flush();
+        }
+
+        foreach ($shippingAddresses as $shippingAddress) {
+            $this->em->remove($shippingAddress);
+            $this->em->flush();
+        }
+
         $this->em->remove($customerProfile);
         $this->em->flush();
     }
