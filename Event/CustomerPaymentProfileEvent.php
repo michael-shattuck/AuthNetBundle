@@ -3,7 +3,7 @@
 namespace Clamidity\AuthNetBundle\Event;
 
 use Symfony\Component\EventDispatcher\Event;
-use Clamidity\AuthNetBundle\Entity\CustomerProfile;
+use Clamidity\AuthNetBundle\Model\CustomerProfile\CustomerProfileInterface;
 
 /**
  * @author Michael Shattuck <ms2474@gmail.com> 
@@ -14,7 +14,7 @@ class CustomerPaymentProfileEvent extends Event
     protected $paymentProfileId;
     protected $accountNumber;
 
-    public function __construct(CustomerProfile $customerProfile, $paymentProfileId, $accountNumber)
+    public function __construct(CustomerProfileInterface $customerProfile, $paymentProfileId, $accountNumber)
     {
         $this->customerProfile = $customerProfile;
         $this->paymentProfileId = $paymentProfileId;

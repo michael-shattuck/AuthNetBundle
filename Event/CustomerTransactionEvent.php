@@ -3,7 +3,7 @@
 namespace Clamidity\AuthNetBundle\Event;
 
 use Symfony\Component\EventDispatcher\Event;
-use Clamidity\AuthNetBundle\Entity\CustomerProfile;
+use Clamidity\AuthNetBundle\Model\CustomerProfile\CustomerProfileInterface;
 
 /**
  * @author Michael Shattuck <ms2474@gmail.com> 
@@ -14,7 +14,7 @@ class CustomerTransactionEvent extends Event
     protected $transactionId;
     protected $amount;
 
-    public function __construct(CustomerProfile $customerProfile, $transactionId, $amount)
+    public function __construct(CustomerProfileInterface $customerProfile, $transactionId, $amount)
     {
         $this->customerProfile = $customerProfile;
         $this->transactionId = $transactionId;

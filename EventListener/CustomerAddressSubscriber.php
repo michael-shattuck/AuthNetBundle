@@ -15,11 +15,13 @@ class CustomerAddressSubscriber implements EventSubscriberInterface
 {
     protected $em;
     protected $securityContext;
+    protected $class;
 
-    public function __construct($em, $securityContext)
+    public function __construct($em, $securityContext, $class)
     {
         $this->em = $em;
         $this->securityContext = $securityContext;
+        $this->class = $class;
     }
 
     public function addAddressToCustomerProfile(CustomerAddressEvent $event)
@@ -28,7 +30,7 @@ class CustomerAddressSubscriber implements EventSubscriberInterface
         $addressId = $event->getAddressId();
         $addressString = $event->getAddress();
 
-        $address = new ShippingAddress();
+        $address = new $this->class();
         $address->setCustomer($customerProfile);
         $address->setShippingAddressId($addressId);
         $address->setAddress($addressString);

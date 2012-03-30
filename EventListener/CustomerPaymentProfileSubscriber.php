@@ -15,11 +15,13 @@ class CustomerPaymentProfileSubscriber implements EventSubscriberInterface
 {
     protected $em;
     protected $securityContext;
+    protected $class;
 
-    public function __construct($em, $securityContext)
+    public function __construct($em, $securityContext, $class)
     {
         $this->em = $em;
         $this->securityContext = $securityContext;
+        $this->class = $class;
     }
 
     public function addPaymentProfileToCustomerProfile(CustomerPaymentProfileEvent $event)
@@ -28,7 +30,7 @@ class CustomerPaymentProfileSubscriber implements EventSubscriberInterface
         $paymentProfileId = $event->getPaymentProfileId();
         $accountNumber = $event->getAccountNumber();
 
-        $paymentProfile = new PaymentProfile();
+        $paymentProfile = new $this->class();
         $paymentProfile->setCustomer($customerProfile);
         $paymentProfile->setPaymentProfileId($paymentProfileId);
         $paymentProfile->setAccountNumber($accountNumber);

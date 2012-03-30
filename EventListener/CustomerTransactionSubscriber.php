@@ -15,11 +15,13 @@ class CustomerTransactionSubscriber implements EventSubscriberInterface
 {
     protected $em;
     protected $securityContext;
+    protected $class;
 
-    public function __construct($em, $securityContext)
+    public function __construct($em, $securityContext, $class)
     {
         $this->em = $em;
         $this->securityContext = $securityContext;
+        $this->class = $class;
     }
 
     public function addTransactionToCustomerProfile(CustomerTransactionEvent $event)
@@ -28,7 +30,7 @@ class CustomerTransactionSubscriber implements EventSubscriberInterface
         $transactionId = $event->getTransactionId();
         $amount = $event->getAmount();
 
-        $transaction = new Transaction();
+        $transaction = new $this->class();
         $transaction->setCustomer($customerProfile);
         $transaction->setTransactionId($transactionId);
         $transaction->setAmount($amount);

@@ -20,6 +20,11 @@ class Configuration implements ConfigurationInterface
                 ->scalarNode('transaction_key')->defaultNull()->end()
                 ->booleanNode('sandbox')->defaultValue(true)->end()
                 ->scalarNode('log_file')->defaultValue(false)->end()
+                ->scalarNode('customer_profile_class')->isRequired()->cannotBeEmpty()->end()
+                ->scalarNode('payment_profile_class')->isRequired()->cannotBeEmpty()->end()
+                ->scalarNode('shipping_address_class')->isRequired()->cannotBeEmpty()->end()
+                ->scalarNode('transaction_class')->isRequired()->cannotBeEmpty()->end()
+                
             ->end();
 
         return $treeBuilder;

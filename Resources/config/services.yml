@@ -3,9 +3,11 @@ parameters:
     authorize_net.factory.class: Clamidity\AuthNetBundle\AuthorizeNet\AuthorizeNetFactory
 
 services:
+    # Factory Class
     authorize_net.factory:
         class: %authorize_net.factory.class%
 
+    # Managers
     authorize_net.manager:
         class: %authorize_net.manager.class%
         factory_service: authorize_net.factory
@@ -20,13 +22,15 @@ services:
         arguments:
             dispatcher: "@event_dispatcher"
             em: "@doctrine.orm.entity_manager"
-            class: Clamidity\AuthNetBundle\Entity\CustomerProfile
+            class: %authorize_net.customer_profile_class%
 
+    # Event Subscribers
     clamidity_authnet.customer.add_address_subscriber:
         class: Clamidity\AuthNetBundle\EventListener\CustomerAddressSubscriber
         arguments:
             em: "@doctrine.orm.entity_manager"
             securityContext: "@security.context"
+            data_class: %authorize_net.shippingaddress_class%
         tags:
             - { name: kernel.event_subscriber }
     clamidity_authnet.customer.add_paymentprofile_subscriber:
@@ -34,6 +38,7 @@ services:
         arguments:
             em: "@doctrine.orm.entity_manager"
             securityContext: "@security.context"
+            data_class: %authorize_net.paymentprofile_class%
         tags:
             - { name: kernel.event_subscriber }
     clamidity_authnet.customer.add_transaction_subscriber:
@@ -41,5 +46,24 @@ services:
         arguments:
             em: "@doctrine.orm.entity_manager"
             securityContext: "@security.context"
+            data_class: %authorize_net.transaction_class%
         tags:
             - { name: kernel.event_subscriber }
+    
+    # Form Configuration Services
+    clamidity_authnet.customerprofile_individual.form:
+        class: Clamidity\AuthNetBundle\Form\CustomerProfileIndividualType
+        arguments:
+            data_class: %authorize_net.customer_profile_class%
+    clamidity_authnet.paymentprofile.form:
+        class: Clamidity\AuthNetBundle\Form\PaymentProfileType
+        arguments:
+            data_class: %authorize_net.paymentprofile_class%
+    clamidity_authnet.shippingaddress.form:
+        class: Clamidity\AuthNetBundle\Form\ShippingAddressType
+        arguments:
+            data_class: %authorize_net.shippingaddress_class%
+    clamidity_authnet.transaction.form:
+        class: Clamidity\AuthNetBundle\Form\TransactionType
+        arguments:
+            data_class: %authorize_net.transaction_class%

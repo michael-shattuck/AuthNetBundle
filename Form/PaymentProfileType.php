@@ -9,7 +9,15 @@ use Symfony\Component\Form\CallbackValidator;
 use Symfony\Component\Form\FormInterface;
 
 class PaymentProfileType extends AbstractType
+
 {
+    protected $class;
+
+    public function __construct($dataClass)
+    {
+        $this->class = $dataClass;
+    }
+
     public function buildForm(FormBuilder $builder, array $options)
     {
         $builder
@@ -42,6 +50,13 @@ class PaymentProfileType extends AbstractType
                 }
             }))
         ;
+    }
+
+    public function getDefaultOptions(array $options)
+    {
+        return array(
+            'data_class' => $this->class,
+        );
     }
 
     public function getName()

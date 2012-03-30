@@ -44,7 +44,7 @@ class CustomerProfileController extends AuthNetBaseController
 
     public function newIndividualAction()
     {
-        $form = $this->createForm(new CustomerProfileIndividualType());
+        $form = $this->createForm($this->container->get('clamidity_authnet.customerprofile_individual.form'));
 
         return $this->render(
             Entities::CUSTOMER_PROFILE_CLASS.':newIndividual.html.twig',
@@ -58,7 +58,7 @@ class CustomerProfileController extends AuthNetBaseController
     {
         $request = $this->getRequest();
 
-        $form = $this->createForm(new CustomerProfileIndividualType());
+        $form = $this->createForm($this->container->get('clamidity_authnet.customerprofile_individual.form'));
         $form->bindRequest($request);
 
         if ($form->isValid()) {
@@ -71,7 +71,7 @@ class CustomerProfileController extends AuthNetBaseController
             $customerProfileId = $this->getCIMManager()->postCustomerProfile($customerProfile);
 
             if ($customerProfileId) {
-                $customerProfileEntity = new CustomerProfile();
+                $customerProfileEntity = $this->getCustomerProfileManager()->createCustomerProfile();
                 $customerProfileEntity->setProfileId($customerProfileId);
 
                 $this->getCustomerProfileManager()->saveCustomerProfile($customerProfileEntity);

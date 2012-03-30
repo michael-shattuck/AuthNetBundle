@@ -6,7 +6,15 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilder;
 
 class ShippingAddressType extends AbstractType
+
 {
+    protected $class;
+
+    public function __construct($dataClass)
+    {
+        $this->class = $dataClass;
+    }
+
     public function buildForm(FormBuilder $builder, array $options)
     {
         $builder
@@ -41,6 +49,13 @@ class ShippingAddressType extends AbstractType
                 'required' => true
             ))
         ;
+    }
+
+    public function getDefaultOptions(array $options)
+    {
+        return array(
+            'data_class' => $this->class,
+        );
     }
 
     public function getName()
