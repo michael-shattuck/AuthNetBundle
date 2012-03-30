@@ -1,0 +1,13 @@
+Clamidity\AuthNetBundle\Entity\PaymentProfile:
+    type: mappedSuperclass
+    fields:
+        paymentProfileId:
+            type: integer
+            length: 50
+        accountNumber:
+            type: string
+            length: 50
+        created_at:
+            type: datetime
+        modified_at:
+            type: datetime
