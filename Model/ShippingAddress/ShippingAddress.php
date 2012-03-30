@@ -2,6 +2,8 @@
 
 namespace Clamidity\AuthNetBundle\Model\ShippingAddress;
 
+use Clamidity\AuthNetBundle\Model\CustomerProfile\CustomerProfileInterface;
+
 /**
  * @author Michael Shattuck <ms2474@gmail.com>
  */
@@ -125,7 +127,7 @@ abstract class ShippingAddress implements ShippingAddressInterface
      * @param CustomerProfile $customer
      * @return ShippingAddress
      */
-    public function setCustomer($customer)
+    public function setCustomer(CustomerProfileInterface $customer)
     {
         $this->customer = $customer;
         $customer->addShippingAddress($this);

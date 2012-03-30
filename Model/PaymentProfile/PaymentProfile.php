@@ -2,6 +2,8 @@
 
 namespace Clamidity\AuthNetBundle\Model\PaymentProfile;
 
+use Clamidity\AuthNetBundle\Model\CustomerProfile\CustomerProfileInterface;
+
 /**
  * @author Michael Shattuck <ms2474@gmail.com>
  */
@@ -125,7 +127,7 @@ abstract class PaymentProfile implements PaymentProfileInterface
      * @param CustomerProfile $customer
      * @return PaymentProfile
      */
-    public function setCustomer(Clamidity\AuthNetBundle\Model\CustomerProfile\CustomerProfileInterface $customer)
+    public function setCustomer(CustomerProfileInterface $customer)
     {
         $this->customer = $customer;
         $customer->addPaymentProfile($this);
