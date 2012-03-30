@@ -7,7 +7,7 @@ use Doctrine\ORM\EntityManager;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Clamidity\AuthNetBundle\Model\CustomerProfile\AbstractCustomerProfileManager;
-use Clamidity\AuthNetBundle\Entity\CustomerProfile;
+use Clamidity\AuthNetBundle\Model\CustomerProfile\CustomerProfileInterface;
 use Clamidity\AuthNetBundle\Event\CustomerAddressEvent;
 use Clamidity\AuthNetBundle\Event\CustomerPaymentProfileEvent;
 use Clamidity\AuthNetBundle\Event\CustomerTransactionEvent;
@@ -47,13 +47,13 @@ class CustomerProfileManager extends AbstractCustomerProfileManager
         return $this->repo->findBy(array());
     }
 
-    protected function doSaveCustomerProfile(CustomerProfile $customerProfile)
+    protected function doSaveCustomerProfile(CustomerProfileInterface $customerProfile)
     {
         $this->em->persist($customerProfile);
         $this->em->flush();
     }
 
-    protected function doRemoveCustomerProfile(CustomerProfile $customerProfile)
+    protected function doRemoveCustomerProfile(CustomerProfileInterface $customerProfile)
     {
         $transactions = $customerProfile->getTransactions();
         $paymentProfiles = $customerProfile->getPaymentProfiles();
@@ -83,7 +83,7 @@ class CustomerProfileManager extends AbstractCustomerProfileManager
         return $this->class;
     }
 
-    public function addCardPaymentProfile(CustomerProfile $customerProfile, $paymentProfileId, $cardNumber)
+    public function addCardPaymentProfile(CustomerProfileInterface $customerProfile, $paymentProfileId, $cardNumber)
     {
         $this->dispatcher->dispatch(
             'clamidity_authnet.customer.add_paymentprofile',
@@ -91,7 +91,7 @@ class CustomerProfileManager extends AbstractCustomerProfileManager
         );
     }
 
-    public function addShippingAddress(CustomerProfile $customerProfile, $addressId, $address)
+    public function addShippingAddress(CustomerProfileInterface $customerProfile, $addressId, $address)
     {
         $this->dispatcher->dispatch(
             'clamidity_authnet.customer.add_address', 

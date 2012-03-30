@@ -4,7 +4,7 @@ namespace Clamidity\AuthNetBundle\Model\CustomerProfile;
 
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Clamidity\AuthNetBundle\Model\CustomerProfile\CustomerProfileManagerInterface;
-use Clamidity\AuthNetBundle\Entity\CustomerProfile;
+use Clamidity\AuthNetBundle\Model\CustomerProfile\CustomerProfileInterface;
 use Clamidity\AuthNetBundle\Events;
 
 abstract class AbstractCustomerProfileManager implements CustomerProfileManagerInterface
@@ -35,19 +35,19 @@ abstract class AbstractCustomerProfileManager implements CustomerProfileManagerI
         * 
         *  @return void
         */
-    public function saveCustomerProfile(CustomerProfile $customerProfile)
+    public function saveCustomerProfile(CustomerProfileInterface $customerProfile)
     {
 //        $this->dispatcher->dispatch(Events::CUSTOMERPROFILE_PRE_PERSIST, new CustomerProfileEvent($customerProfile));
         $this->doSaveCustomerProfile($customerProfile);
 //        $this->dispatcher->dispatch(Events::CUSTOMERPROFILE_POST_PERSIST, new CustomerProfileEvent($customerProfile));
     }
     
-    abstract protected function doSaveCustomerProfile(CustomerProfile $customerProfile);
+    abstract protected function doSaveCustomerProfile(CustomerProfileInterface $customerProfile);
     
-    public function removeCustomerProfile(CustomerProfile $customerProfile)
+    public function removeCustomerProfile(CustomerProfileInterface $customerProfile)
     {
         $this->doRemoveCustomerProfile($customerProfile);
     }
     
-    abstract protected function doRemoveCustomerProfile(CustomerProfile $customerProfile);
+    abstract protected function doRemoveCustomerProfile(CustomerProfileInterface $customerProfile);
 }

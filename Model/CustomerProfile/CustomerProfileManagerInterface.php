@@ -4,7 +4,6 @@ namespace Clamidity\AuthNetBundle\Model\CustomerProfile;
 
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use Clamidity\AuthNetBundle\Entity\CustomerProfile;
 
 interface CustomerProfileManagerInterface
 {
@@ -20,7 +19,7 @@ interface CustomerProfileManagerInterface
         * 
         *  @return void
         */
-    function saveCustomerProfile(CustomerProfile $customerProfile);
+    function saveCustomerProfile(CustomerProfileInterface $customerProfile);
     
     /**
      * @return CustomerProfile
