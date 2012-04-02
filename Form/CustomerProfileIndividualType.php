@@ -28,7 +28,7 @@ class CustomerProfileIndividualType extends AbstractType
             ->add('type', 'hidden', array(
                 'data' => 'individual',
             ))
-            ->add('paymentprofile', new $this->paymentProfileType())
+            ->add('paymentprofile', $this->paymentProfileType())
         ;
     }
 
