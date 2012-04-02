@@ -32,7 +32,7 @@ class PaymentProfileType extends AbstractType
             ->add('expirationmonth', 'integer', array(
                 'required' => true,
             ))
-            ->add('billingaddress', $this->shipping_address_type())
+            ->add('billingaddress', $this->shipping_address_type)
             ->add('sameAsShipping', 'checkbox', array(
                 'label' => 'Use address for shipping?',
                 'required' => false
