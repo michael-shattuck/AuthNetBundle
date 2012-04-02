@@ -1,33 +1,33 @@
 <?php
 
-namespace Clamidity\AuthNetBundle\Model\CustomerProfile;
+namespace Clamidity\AuthNetBundle\Model\Transaction;
 
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-interface CustomerProfileManagerInterface
+interface TransactionManagerInterface
 {
      /**
-        *  Return a new (empty) CustomerProfile entity
+        *  Return a new (empty) Transaction entity
         * 
-        *  @return CustomerProfile
+        *  @return Transaction
         */
-    function createCustomerProfile();
+    function createTransaction();
     
     /**
-        * Persist a CustomerProfile to the database
+        * Persist a Transaction to the database
         * 
         *  @return void
         */
-    function saveCustomerProfile(CustomerProfileInterface $customerProfile);
+    function saveTransaction(TransactionInterface $transaction);
     
     /**
-     * @return CustomerProfile
+     * @return Transaction
      */
     function find($id);
 
     /**
-     * @return CustomerProfile
+     * @return Transaction
      * @throws NotFoundHttpException if entity is not found
      */
     function findOr404($id);
