@@ -3,7 +3,7 @@
 namespace Clamidity\AuthNetBundle\Event;
 
 use Symfony\Component\EventDispatcher\Event;
-use Clamidity\AuthNetBundle\Model\CustomerProfile\PaymentProfileInterface;
+use Clamidity\AuthNetBundle\Model\PaymentProfile\PaymentProfileInterface;
 
 /**
  * @author Michael Shattuck <ms2474@gmail.com> 
