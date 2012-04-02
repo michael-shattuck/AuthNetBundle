@@ -11,8 +11,8 @@ class Events
     const CUSTOMER_ADD_PAYMENTPROFILE = 'clamidity_authnet.customer.add_paymentprofile';
     const CUSTOMER_ADD_TRANSACTION = 'clamidity_authnet.customer.add_transaction';
 
-    const CUSTOMER_PRE_PERSIST = 'clamidity_authnet.customer.pre_persist';
-    const CUSTOMER_POST_PERSIST = 'clamidity_authnet.customer.post_persist';
+    const CUSTOMERPROFILE_PRE_PERSIST = 'clamidity_authnet.customer.pre_persist';
+    const CUSTOMERPROFILE_POST_PERSIST = 'clamidity_authnet.customer.post_persist';
 
     const PAYMENTPROFILE_PRE_PERSIST = 'clamidity_authnet.paymentprofile.pre_persist';
     const PAYMENTPROFILE_POST_PERSIST = 'clamidity_authnet.paymentprofile.post_persist';
