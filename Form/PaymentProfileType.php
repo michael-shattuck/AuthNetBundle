@@ -12,12 +12,12 @@ class PaymentProfileType extends AbstractType
 
 {
     protected $class;
-    protected $shipping_address_type;
+    protected $shippingAddressClass;
 
-    public function __construct($dataClass, $shipping_address_type)
+    public function __construct($dataClass, $shipping_address_class)
     {
         $this->class = $dataClass;
-        $this->shippingAddressType = $shipping_address_type;
+        $this->shippingAddressClass = $shipping_address_class;
     }
 
     public function buildForm(FormBuilder $builder, array $options)
@@ -32,7 +32,7 @@ class PaymentProfileType extends AbstractType
             ->add('expirationmonth', 'integer', array(
                 'required' => true,
             ))
-            ->add('billingaddress', $this->shipping_address_type)
+            ->add('billingaddress', new ShippingAddressType($this->shippingAddressClass))
             ->add('sameAsShipping', 'checkbox', array(
                 'label' => 'Use address for shipping?',
                 'required' => false
