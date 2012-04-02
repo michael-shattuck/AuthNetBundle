@@ -8,3 +8,5 @@ Clamidity\AuthNetBundle\Entity\ShippingAddress:
             type: datetime
         modified_at:
             type: datetime
+        address:
+            type: string

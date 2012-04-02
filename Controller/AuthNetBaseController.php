@@ -92,7 +92,7 @@ class AuthNetBaseController extends ContainerAware
     {
         $securityContext = $this->getSecurity();
 
-        if (false === $securityContext->isGranted($mode, $entity))
+        if (false === $securityContext->isGranted($mode, $entity) && false === $securityContext->isGranted('ROLE_ADMIN'))
         {
             throw new \Symfony\Component\Security\Core\Exception\AccessDeniedException();
         }
