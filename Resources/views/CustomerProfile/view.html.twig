@@ -31,7 +31,7 @@
 
     <div>
         <h3>Transactions</h3>
-        {% if customerProfile.shippingAddresses[0] != NULL %}
+        {% if customerProfile.shippingAddresses != NULL %}
         <a href="{{ path('clamidity_authnet_customerprofile_transaction_new', {id:customerProfile.id}) }}">New Transaction</a>
         {% else %}
         <a href="{{ path('clamidity_authnet_customerprofile_addshippingaddress', {id:customerProfile.id}) }}">Please add a shipping address before creating a transaction.</a>
