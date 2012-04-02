@@ -17,7 +17,7 @@ class Events
     const PAYMENTPROFILE_PRE_PERSIST = 'clamidity_authnet.paymentprofile.pre_persist';
     const PAYMENTPROFILE_POST_PERSIST = 'clamidity_authnet.paymentprofile.post_persist';
 
-    const SHIPPINGADDRESS_PRE__PERSIST = 'clamidity_authnet.shippingaddress.pre_persist';
+    const SHIPPINGADDRESS_PRE_PERSIST = 'clamidity_authnet.shippingaddress.pre_persist';
     const SHIPPINGADDRESS_POST_PERSIST = 'clamidity_authnet.shippingaddress.post_persist';
 
     const TRANSACTION_PRE_PERSIST = 'clamidity_authnet.transaction.pre_persist';
