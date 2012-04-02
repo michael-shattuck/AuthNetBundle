@@ -23,6 +23,24 @@ services:
             dispatcher: "@event_dispatcher"
             em: "@doctrine.orm.entity_manager"
             class: %authorize_net.customer_profile_class%
+    clamidity_authnet.paymentprofile.manager:
+        class: Clamidity\AuthNetBundle\Entity\PaymentProfileManager
+        arguments:
+            dispatcher: "@event_dispatcher"
+            em: "@doctrine.orm.entity_manager"
+            class: %authorize_net.payment_profile_class%
+    clamidity_authnet.shippingaddress.manager:
+        class: Clamidity\AuthNetBundle\Entity\ShippingAddressManager
+        arguments:
+            dispatcher: "@event_dispatcher"
+            em: "@doctrine.orm.entity_manager"
+            class: %authorize_net.shipping_address_class%
+    clamidity_authnet.transaction.manager:
+        class: Clamidity\AuthNetBundle\Entity\TransactionManager
+        arguments:
+            dispatcher: "@event_dispatcher"
+            em: "@doctrine.orm.entity_manager"
+            class: %authorize_net.transaction_class%
 
     # Event Subscribers
     clamidity_authnet.customer.add_address_subscriber:

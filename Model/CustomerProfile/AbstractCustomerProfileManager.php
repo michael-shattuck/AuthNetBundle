@@ -37,9 +37,9 @@ abstract class AbstractCustomerProfileManager implements CustomerProfileManagerI
         */
     public function saveCustomerProfile(CustomerProfileInterface $customerProfile)
     {
-//        $this->dispatcher->dispatch(Events::CUSTOMERPROFILE_PRE_PERSIST, new CustomerProfileEvent($customerProfile));
+        $this->dispatcher->dispatch(Events::CUSTOMERPROFILE_PRE_PERSIST, new CustomerProfileEvent($customerProfile));
         $this->doSaveCustomerProfile($customerProfile);
-//        $this->dispatcher->dispatch(Events::CUSTOMERPROFILE_POST_PERSIST, new CustomerProfileEvent($customerProfile));
+        $this->dispatcher->dispatch(Events::CUSTOMERPROFILE_POST_PERSIST, new CustomerProfileEvent($customerProfile));
     }
     
     abstract protected function doSaveCustomerProfile(CustomerProfileInterface $customerProfile);

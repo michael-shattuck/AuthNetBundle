@@ -7,6 +7,7 @@ use Doctrine\ORM\EntityManager;
 use Clamidity\AuthNetBundle\Events;
 use Clamidity\AuthNetBundle\Event\CustomerTransactionEvent;
 use Clamidity\AuthNetBundle\Entity\Transaction;
+use Clamidity\AuthNetBundle\Entity\TransactionManager;
 
 /**
  * @author Michael Shattuck <ms2474@gmail.com> 
@@ -15,13 +16,13 @@ class CustomerTransactionSubscriber implements EventSubscriberInterface
 {
     protected $em;
     protected $securityContext;
-    protected $class;
+    protected $transactionManager;
 
-    public function __construct($em, $securityContext, $class)
+    public function __construct($em, $securityContext, TransactionManager $transaction_manager)
     {
         $this->em = $em;
         $this->securityContext = $securityContext;
-        $this->class = $class;
+        $this->transactionManager = $transaction_manager;
     }
 
     public function addTransactionToCustomerProfile(CustomerTransactionEvent $event)
@@ -30,13 +31,12 @@ class CustomerTransactionSubscriber implements EventSubscriberInterface
         $transactionId = $event->getTransactionId();
         $amount = $event->getAmount();
 
-        $transaction = new $this->class();
+        $transaction = $this->transactionManager->createTransaction();
         $transaction->setCustomer($customerProfile);
         $transaction->setTransactionId($transactionId);
         $transaction->setAmount($amount);
 
-        $this->em->persist($transaction);
-        $this->em->flush();
+        $this->transactionManager->saveTransaction($transaction);
     }
 
     public static function getSubscribedEvents()
