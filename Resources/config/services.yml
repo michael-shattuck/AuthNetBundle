@@ -55,12 +55,12 @@ services:
         class: Clamidity\AuthNetBundle\Form\CustomerProfileIndividualType
         arguments:
             data_class: %authorize_net.customer_profile_class%
-            payment_profile_type: %clamidity_authnet.paymentprofile.form%
+            payment_profile_type: "@clamidity_authnet.paymentprofile.form"
     clamidity_authnet.paymentprofile.form:
         class: Clamidity\AuthNetBundle\Form\PaymentProfileType
         arguments:
             data_class: %authorize_net.payment_profile_class%
-            shipping_address_type: %clamidity_authnet.shippingaddress.form%
+            shipping_address_type: "@clamidity_authnet.shippingaddress.form"
     clamidity_authnet.shippingaddress.form:
         class: Clamidity\AuthNetBundle\Form\ShippingAddressType
         arguments:
