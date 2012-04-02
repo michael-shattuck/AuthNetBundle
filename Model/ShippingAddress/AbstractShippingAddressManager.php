@@ -6,6 +6,7 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Clamidity\AuthNetBundle\Model\ShippingAddress\ShippingAddressManagerInterface;
 use Clamidity\AuthNetBundle\Model\ShippingAddress\ShippingAddressInterface;
 use Clamidity\AuthNetBundle\Events;
+use Clamidity\AuthNetBundle\Event\ShippingAddressEvent;
 
 abstract class AbstractShippingAddressManager implements ShippingAddressManagerInterface
 {

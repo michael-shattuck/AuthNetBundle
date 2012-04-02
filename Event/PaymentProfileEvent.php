@@ -8,7 +8,7 @@ use Clamidity\AuthNetBundle\Model\CustomerProfile\PaymentProfileInterface;
 /**
  * @author Michael Shattuck <ms2474@gmail.com> 
  */
-class PaymentProfileProfileEvent extends Event
+class PaymentProfileEvent extends Event
 {
     protected $paymentProfile;
 

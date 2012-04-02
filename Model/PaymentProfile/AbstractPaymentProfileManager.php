@@ -6,6 +6,7 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Clamidity\AuthNetBundle\Model\PaymentProfile\PaymentProfileManagerInterface;
 use Clamidity\AuthNetBundle\Model\PaymentProfile\PaymentProfileInterface;
 use Clamidity\AuthNetBundle\Events;
+use Clamidity\AuthNetBundle\Event\PaymentProfileEvent;
 
 abstract class AbstractPaymentProfileManager implements PaymentProfileManagerInterface
 {

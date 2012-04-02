@@ -6,6 +6,7 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Clamidity\AuthNetBundle\Model\Transaction\TransactionManagerInterface;
 use Clamidity\AuthNetBundle\Model\Transaction\TransactionInterface;
 use Clamidity\AuthNetBundle\Events;
+use Clamidity\AuthNetBundle\Event\TransactionEvent;
 
 abstract class AbstractTransactionManager implements TransactionManagerInterface
 {

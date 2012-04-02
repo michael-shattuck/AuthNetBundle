@@ -6,6 +6,7 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Clamidity\AuthNetBundle\Model\CustomerProfile\CustomerProfileManagerInterface;
 use Clamidity\AuthNetBundle\Model\CustomerProfile\CustomerProfileInterface;
 use Clamidity\AuthNetBundle\Events;
+use Clamidity\AuthNetBundle\Event\CustomerProfileEvent;
 
 abstract class AbstractCustomerProfileManager implements CustomerProfileManagerInterface
 {
