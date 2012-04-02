@@ -8,10 +8,12 @@ use Symfony\Component\Form\FormBuilder;
 class CustomerProfileIndividualType extends AbstractType
 {
     protected $class;
+    protected $paymentProfileType;
 
-    public function __construct($dataClass)
+    public function __construct($dataClass, $payment_profile_type)
     {
         $this->class = $dataClass;
+        $this->class = $payment_profile_type;
     }
     
     public function buildForm(FormBuilder $builder, array $options)
@@ -26,7 +28,7 @@ class CustomerProfileIndividualType extends AbstractType
             ->add('type', 'hidden', array(
                 'data' => 'individual',
             ))
-            ->add('paymentprofile', new PaymentProfileType())
+            ->add('paymentprofile', new $this->paymentProfileType())
         ;
     }
 
