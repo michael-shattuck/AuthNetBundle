@@ -16,6 +16,10 @@ class CustomerProfileController extends AuthNetBaseController
 
     public function indexAction()
     {
+        if ($this->container->getParameter('authorize_net.secure')) {
+            $this->checkAdminAccess();
+        }
+
         $profileIdArray = $this->getCustomerProfileManager()->findAll();
 
         return $this->container->get('templating')->renderResponse(
@@ -28,6 +32,11 @@ class CustomerProfileController extends AuthNetBaseController
     public function viewAction($id)
     {
         $customerProfile = $this->getCustomerProfileManager()->findOr404($id);
+
+        if ($this->container->getParameter('authorize_net.secure')) {
+            $this->checkAccess('VIEW', $customerProfile);
+        }
+
         $deleteForm = $this->createDeleteForm($id);
 
         return $this->render(
@@ -110,6 +119,12 @@ class CustomerProfileController extends AuthNetBaseController
 
     public function addShippingAddressAction($id)
     {
+        $customerProfile = $this->getCustomerProfileManager()->findOr404($id);
+
+        if ($this->container->getParameter('authorize_net.secure')) {
+            $this->checkAccess('EDIT', $customerProfile);
+        }
+
         $form = $this->createForm($this->container->get('clamidity_authnet.shippingaddress.form'));
 
         return $this->render(
@@ -124,6 +139,13 @@ class CustomerProfileController extends AuthNetBaseController
 
     public function postShippingAddressAction($id)
     {
+        
+        $customerProfile = $this->getCustomerProfileManager()->findOr404($id);
+
+        if ($this->container->getParameter('authorize_net.secure')) {
+            $this->checkAccess('EDIT', $customerProfile);
+        }
+
         $request = $this->getRequest();
 
         $form = $this->createForm($this->container->get('clamidity_authnet.shippingaddress.form'));
@@ -131,7 +153,6 @@ class CustomerProfileController extends AuthNetBaseController
 
         if ($form->isValid()) {
             $addressArray = $request->get('clamidity_authnetbundle_customerprofileaddresstype');
-            $customerProfile = $this->getCustomerProfileManager()->findOr404($id);
             $this->addShippingAddress($customerProfile, $addressArray);
 
             return new RedirectResponse($this->generateUrl('clamidity_authnet_customerprofile_index'));
@@ -149,6 +170,11 @@ class CustomerProfileController extends AuthNetBaseController
     public function newTransactionAction($id)
     {
         $customerProfile = $this->getCustomerProfileManager()->findOr404($id);
+
+        if ($this->container->getParameter('authorize_net.secure')) {
+            $this->checkAccess('EDIT', $customerProfile);
+        }
+
         $form = $this->createForm(new CustomerProfileTransactionType($id));
 
         return $this->render(
@@ -162,6 +188,12 @@ class CustomerProfileController extends AuthNetBaseController
 
     public function postTransactionAction($id)
     {
+        $customerProfile = $this->getCustomerProfileManager()->findOr404($id);
+
+        if ($this->container->getParameter('authorize_net.secure')) {
+            $this->checkAccess('EDIT', $customerProfile);
+        }
+
         $request = $this->getRequest();
 
         $form = $this->createForm(new CustomerProfileTransactionType($id));
@@ -171,7 +203,6 @@ class CustomerProfileController extends AuthNetBaseController
             $transaction = array();
             $transactionArray = $request->get('clamidity_authnetbundle_cimtransactiontype');
 
-            $customerProfile = $this->getCustomerProfileManager()->findOr404($id);
             $lineItems = array($transactionArray['lineItem']);
             $amount = $transactionArray['lineItem']['unitPrice'] * $transactionArray['lineItem']['quantity'];
 
@@ -203,13 +234,18 @@ class CustomerProfileController extends AuthNetBaseController
 
     public function deleteCustomerProfileAction($id)
     {
+        $customerProfile = $this->getCustomerProfileManager()->findOr404($id);
+
+        if ($this->container->getParameter('authorize_net.secure')) {
+            $this->checkAccess('EDIT', $customerProfile);
+        }
+
         $request = $this->getRequest();
 
         $form = $this->createDeleteForm($id);
         $form->bindRequest($request);
 
         if ($form->isValid()) {
-            $customerProfile = $this->getCustomerProfileManager()->findOr404($id);
             if ($this->getCIMManager()->deleteCustomerProfile($customerProfile->getProfileId())) {
                 $this->getCustomerProfileManager()->removeCustomerProfile($customerProfile);
             }

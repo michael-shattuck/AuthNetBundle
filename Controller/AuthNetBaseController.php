@@ -82,4 +82,29 @@ class AuthNetBaseController extends ContainerAware
             ->getForm()
         ;
     }
+
+    protected function getSecurity()
+    {
+        return $securityContext = $this->container->get('security.context');
+    }
+
+    protected function checkAccess($mode, $entity)
+    {
+        $securityContext = $this->getSecurity();
+
+        if (false === $securityContext->isGranted($mode, $entity))
+        {
+            throw new \Symfony\Component\Security\Core\Exception\AccessDeniedException();
+        }
+    }
+
+    protected function checkAdminAccess()
+    {
+        $securityContext = $this->getSecurity();
+
+        if (false === $securityContext->isGranted('ROLE_ADMIN'))
+        {
+            throw new \Symfony\Component\Security\Core\Exception\AccessDeniedException();
+        }
+    }
 }
