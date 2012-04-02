@@ -4,9 +4,6 @@ namespace Clamidity\AuthNetBundle\Controller;
 
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Clamidity\AuthNetBundle\Entity\CustomerProfile;
-use Clamidity\AuthNetBundle\Form\CustomerProfileIndividualType;
-use Clamidity\AuthNetBundle\Form\CustomerProfileTransactionType;
-use Clamidity\AuthNetBundle\Form\ShippingAddressType;
 use Clamidity\AuthNetBundle\Event\CustomerAddressEvent;
 use Clamidity\AuthNetBundle\Event\CustomerPaymentProfileEvent;
 use Clamidity\AuthNetBundle\Event\CustomerTransactionEvent;
@@ -113,7 +110,7 @@ class CustomerProfileController extends AuthNetBaseController
 
     public function addShippingAddressAction($id)
     {
-        $form = $this->createForm(new ShippingAddressType);
+        $form = $this->createForm($this->container->get('clamidity_authnet.shippingaddress.form'));
 
         return $this->render(
             Entities::CUSTOMER_PROFILE_CLASS.':addShippingAddress.html.twig',
@@ -129,7 +126,7 @@ class CustomerProfileController extends AuthNetBaseController
     {
         $request = $this->getRequest();
 
-        $form = $this->createForm(new ShippingAddressType);
+        $form = $this->createForm($this->container->get('clamidity_authnet.shippingaddress.form'));
         $form->bindRequest($request);
 
         if ($form->isValid()) {

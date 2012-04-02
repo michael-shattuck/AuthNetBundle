@@ -30,7 +30,7 @@ services:
         arguments:
             em: "@doctrine.orm.entity_manager"
             securityContext: "@security.context"
-            data_class: %authorize_net.shippingaddress_class%
+            class: %authorize_net.shippingaddress_class%
         tags:
             - { name: kernel.event_subscriber }
     clamidity_authnet.customer.add_paymentprofile_subscriber:
@@ -38,7 +38,7 @@ services:
         arguments:
             em: "@doctrine.orm.entity_manager"
             securityContext: "@security.context"
-            data_class: %authorize_net.paymentprofile_class%
+            class: %authorize_net.paymentprofile_class%
         tags:
             - { name: kernel.event_subscriber }
     clamidity_authnet.customer.add_transaction_subscriber:
@@ -46,7 +46,7 @@ services:
         arguments:
             em: "@doctrine.orm.entity_manager"
             securityContext: "@security.context"
-            data_class: %authorize_net.transaction_class%
+            class: %authorize_net.transaction_class%
         tags:
             - { name: kernel.event_subscriber }
     
