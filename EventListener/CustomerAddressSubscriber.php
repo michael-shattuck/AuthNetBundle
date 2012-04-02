@@ -16,7 +16,6 @@ class CustomerAddressSubscriber implements EventSubscriberInterface
 {
     protected $em;
     protected $securityContext;
-    protected $class;
     protected $shippingAddressManager;
 
     public function __construct($em, $securityContext, ShippingAddressManager $shipping_address_manager)

@@ -48,7 +48,7 @@ services:
         arguments:
             em: "@doctrine.orm.entity_manager"
             securityContext: "@security.context"
-            class: %authorize_net.shipping_address_class%
+            shipping_address_manager: "@clamidity_authnet.shippingaddress.manager"
         tags:
             - { name: kernel.event_subscriber }
     clamidity_authnet.customer.add_paymentprofile_subscriber:
@@ -56,7 +56,7 @@ services:
         arguments:
             em: "@doctrine.orm.entity_manager"
             securityContext: "@security.context"
-            class: %authorize_net.payment_profile_class%
+            payment_profile_manager: "@clamidity_authnet.paymentprofile.manager"
         tags:
             - { name: kernel.event_subscriber }
     clamidity_authnet.customer.add_transaction_subscriber:
@@ -64,7 +64,7 @@ services:
         arguments:
             em: "@doctrine.orm.entity_manager"
             securityContext: "@security.context"
-            class: %authorize_net.transaction_class%
+            transaction_manager: "@clamidity_authnet.transaction.manager"
         tags:
             - { name: kernel.event_subscriber }
     
