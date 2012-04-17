@@ -30,7 +30,7 @@ class PaymentProfileType extends AbstractType
                 'required' => true,
                 'attr' => array('placeholder' => 'XXXX'),
             ))
-            ->add('expirationmonth', 'string', array(
+            ->add('expirationmonth', 'text', array(
                 'required' => true,
                 'attr' => array('placeholder' => 'XX'),
             ))
@@ -56,7 +56,7 @@ class PaymentProfileType extends AbstractType
         ;
     }
 
-    public function getDefaultOptions()
+    public function getDefaultOptions(array $options)
     {
         return array(
             'data_class' => $this->class,
