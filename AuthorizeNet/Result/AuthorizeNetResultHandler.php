@@ -27,14 +27,14 @@ class AuthorizeNetResultHandler extends ContainerAware
         }
 
         if (!$result || $result == 'Error') {
-            if (!$this->debugMode) {
+//            if (!$this->debugMode) {
                 throw new AuthorizeNetException($response->xml->messages->message->code.': '.$response->xml->messages->message->text);
-            } else {
-                $logObject = new AuthorizeNetLogWriter();
-                $logObject->writeException($response->xml->messages->message->code.': '.$response->xml->messages->message->text.'\n');
-            }
-
-            return false;
+//            } else {
+//                $logObject = new AuthorizeNetLogWriter();
+//                $logObject->writeException($response->xml->messages->message->code.': '.$response->xml->messages->message->text.'\n');
+//            }
+//
+//            return false;
         }
 
         return true;
