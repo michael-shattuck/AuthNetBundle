@@ -30,7 +30,7 @@ class PaymentProfileType extends AbstractType
                 'required' => true,
                 'attr' => array('placeholder' => 'XXXX'),
             ))
-            ->add('expirationmonth', 'number', array(
+            ->add('expirationmonth', 'string', array(
                 'required' => true,
                 'attr' => array('placeholder' => 'XX'),
             ))
@@ -46,10 +46,10 @@ class PaymentProfileType extends AbstractType
                 if (!is_numeric($form["cardnumber"]->getData()) || strlen($form["cardnumber"]->getData()) < 14 || strlen($form["cardnumber"]->getData()) > 16) {
                     $form->addError(new FormError('Invalid card number.'));
                 }
-                if ($form["expirationyear"]->getData() < date('Y')) {
+                if (!is_numeric($form["expirationyear"]->getData()) || $form["expirationyear"]->getData() < date('Y')) {
                     $form->addError(new FormError('Invalid expiration year.'));
                 }
-                if ($form["expirationmonth"]->getData() < 0 || $form["expirationmonth"]->getData() > 12) {
+                if (!is_numeric($form["expirationmonth"]->getData()) || $form["expirationmonth"]->getData() < 0 || $form["expirationmonth"]->getData() > 12) {
                     $form->addError(new FormError('Invalid expiration month.'));
                 }
             }))
