@@ -26,11 +26,13 @@ class PaymentProfileType extends AbstractType
             ->add('cardnumber', 'text', array(
                 'required' => true
             ))
-            ->add('expirationyear', 'integer', array(
+            ->add('expirationyear', 'number', array(
                 'required' => true,
+                'attr' => array('placeholder' => 'XXXX'),
             ))
-            ->add('expirationmonth', 'integer', array(
+            ->add('expirationmonth', 'number', array(
                 'required' => true,
+                'attr' => array('placeholder' => 'XX'),
             ))
             ->add('billingaddress', new ShippingAddressType($this->shippingAddressClass))
             ->add('sameAsShipping', 'checkbox', array(
