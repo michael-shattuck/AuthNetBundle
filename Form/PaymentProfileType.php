@@ -56,13 +56,6 @@ class PaymentProfileType extends AbstractType
         ;
     }
 
-    public function getDefaultOptions()
-    {
-        return array(
-            'data_class' => $this->class,
-        );
-    }
-
     public function getName()
     {
         return 'clamidity_authnetbundle_cimpaymentprofiletype';

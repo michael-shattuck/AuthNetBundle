@@ -53,13 +53,6 @@ class CustomerProfileTransactionType extends AbstractType
         ;
     }
 
-    public function getDefaultOptions()
-    {
-        return array(
-            'data_class' => 'Clamidity\AuthNetBundle\Entity\CustomerProfile',
-        );
-    }
-
     public function getName()
     {
         return 'clamidity_authnetbundle_cimtransactiontype';
