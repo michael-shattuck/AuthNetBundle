@@ -25,7 +25,7 @@ class Configuration implements ConfigurationInterface
                 ->scalarNode('payment_profile_class')->isRequired()->cannotBeEmpty()->end()
                 ->scalarNode('shipping_address_class')->isRequired()->cannotBeEmpty()->end()
                 ->scalarNode('transaction_class')->isRequired()->cannotBeEmpty()->end()
-                
+                ->scalarNode('profile_creation_redirect')->isRequired()->cannotBeEmpty()->end()
             ->end();
 
         return $treeBuilder;

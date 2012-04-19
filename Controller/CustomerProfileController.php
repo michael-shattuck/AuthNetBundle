@@ -104,7 +104,7 @@ class CustomerProfileController extends AuthNetBaseController
                 }
             }
 
-            $uri = $this->generateUrl('clamidity_authnet_customerprofile_index');
+            $uri = $this->generateUrl($this->container->getParameter('authorize_net.profile_creation_redirect'));
 
             return new RedirectResponse($uri);
         }

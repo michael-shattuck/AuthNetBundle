@@ -30,6 +30,7 @@ class ClamidityAuthNetExtension extends Extension
         $container->setParameter('authorize_net.payment_profile_class', $config['payment_profile_class']);
         $container->setParameter('authorize_net.shipping_address_class', $config['shipping_address_class']);
         $container->setParameter('authorize_net.transaction_class', $config['transaction_class']);
+        $container->setParameter('authorize_net.profile_creation_redirect', $config['profile_creation_redirect']);
 
         if (isset($config['log_file'])) {
             $container->setParameter('authorize_net.log_file', $config['log_file']);
