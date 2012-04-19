@@ -155,7 +155,7 @@ class CustomerProfileController extends AuthNetBaseController
             $addressArray = $request->get('clamidity_authnetbundle_customerprofileaddresstype');
             $this->addShippingAddress($customerProfile, $addressArray);
 
-            return new RedirectResponse($this->generateUrl('clamidity_authnet_customerprofile_index'));
+            return new RedirectResponse($this->container->getParameter('authorize_net.profile_creation_redirect'));
         }
 
         return $this->render(
@@ -213,12 +213,7 @@ class CustomerProfileController extends AuthNetBaseController
 
             $this->addTransaction($customerProfile, $transaction);
 
-            $uri = $this->generateUrl(
-                'clamidity_authnet_customerprofile_view',
-                array(
-                    'id' => $id
-                )
-            );
+            $uri = $this->generateUrl($this->container->getParameter('authorize_net.profile_creation_redirect'));
 
             return new RedirectResponse($uri);
         }
@@ -251,7 +246,7 @@ class CustomerProfileController extends AuthNetBaseController
             }
         }
 
-        return new RedirectResponse($this->generateUrl('clamidity_authnet_customerprofile_index'));
+        return new RedirectResponse($this->generateUrl($this->container->getParameter('authorize_net.profile_creation_redirect')));
     }
 
     private function addShippingAddress(CustomerProfile $customerProfile, array $addressArray)
