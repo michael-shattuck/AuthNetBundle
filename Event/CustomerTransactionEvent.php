@@ -13,12 +13,14 @@ class CustomerTransactionEvent extends Event
     protected $customerProfile;
     protected $transactionId;
     protected $amount;
+    protected $user;
 
-    public function __construct(CustomerProfileInterface $customerProfile, $transactionId, $amount)
+    public function __construct(CustomerProfileInterface $customerProfile, $transactionId, $amount, $user = null)
     {
         $this->customerProfile = $customerProfile;
         $this->transactionId = $transactionId;
         $this->amount = $amount;
+        $this->user = $user;
     }
 
     /**
@@ -37,5 +39,10 @@ class CustomerTransactionEvent extends Event
     public function getAmount()
     {
         return $this->amount;
+    }
+
+    public function getUser()
+    {
+        return $this->user;
     }
 }

@@ -99,11 +99,11 @@ class CustomerProfileManager extends AbstractCustomerProfileManager
         );
     }
 
-    public function addTransaction($customerProfile, $transactionId, $amount)
+    public function addTransaction($customerProfile, $transactionId, $amount, $user = null)
     {
         $this->dispatcher->dispatch(
             'clamidity_authnet.customer.add_transaction', 
-            new CustomerTransactionEvent($customerProfile, $transactionId, $amount)
+            new CustomerTransactionEvent($customerProfile, $transactionId, $amount, $user)
         );
     }
 }
