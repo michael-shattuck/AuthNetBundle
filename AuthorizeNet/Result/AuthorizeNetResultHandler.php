@@ -21,14 +21,24 @@ class AuthorizeNetResultHandler extends ContainerAware
     public function checkResult($response)
     {
         if ($response) {
-            $result = strip_tags($response->xpath_xml->messages->resultCode->asXML());
+            try {
+                $result = strip_tags($response->xml->messages->resultCode->asXML());
+            }
+            catch (\ErrorException $e) {
+                $result = strip_tags($response->xpath_xml->messages->resultCode->asXML());
+            }
         } else {
             throw new AuthorizeNetException('Error: Invalid operation');
         }
 
         if (!$result || $result == 'Error') {
 //            if (!$this->debugMode) {
+            try {
+                throw new AuthorizeNetException($response->xml->messages->message->code.': '.$response->xml->messages->message->text);
+            }
+            catch (\ErrorException $e) {
                 throw new AuthorizeNetException($response->xpath_xml->messages->message->code.': '.$response->xpath_xml->messages->message->text);
+            }
 //            } else {
 //                $logObject = new AuthorizeNetLogWriter();
 //                $logObject->writeException($response->xml->messages->message->code.': '.$response->xml->messages->message->text.'\n');
