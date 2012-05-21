@@ -2,7 +2,7 @@ Clamidity\AuthNetBundle\Entity\Transaction:
     type: mappedSuperclass
     fields:
         transactionId:
-            type: integer
+            type: bigint
             length: 50
         created_at:
             type: datetime
