@@ -2,7 +2,7 @@ Clamidity\AuthNetBundle\Entity\CustomerProfile:
     type: mappedSuperclass
     fields:
         profileId:
-            type: integer
+            type: bigint
             length: 50
         created_at:
             type: datetime
