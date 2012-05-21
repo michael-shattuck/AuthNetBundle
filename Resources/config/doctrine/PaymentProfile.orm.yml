@@ -2,7 +2,7 @@ Clamidity\AuthNetBundle\Entity\PaymentProfile:
     type: mappedSuperclass
     fields:
         paymentProfileId:
-            type: bigint
+            type: string
             length: 50
         accountNumber:
             type: string

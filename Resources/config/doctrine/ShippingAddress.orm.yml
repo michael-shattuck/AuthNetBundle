@@ -2,7 +2,7 @@ Clamidity\AuthNetBundle\Entity\ShippingAddress:
     type: mappedSuperclass
     fields:
         shippingAddressId:
-            type: bigint
+            type: string
             length: 50
         created_at:
             type: datetime
