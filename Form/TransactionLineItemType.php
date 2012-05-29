@@ -7,7 +7,7 @@ use Symfony\Component\Form\FormBuilder;
 
 class TransactionLineItemType extends AbstractType
 {
-    public function buildForm(FormBuilder $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
             ->add('itemId', 'text', array(
