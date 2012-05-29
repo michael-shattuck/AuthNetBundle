@@ -3,7 +3,7 @@
 namespace Clamidity\AuthNetBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormBuilder;
 
 class CustomerProfileIndividualType extends AbstractType
 {
@@ -18,7 +18,7 @@ class CustomerProfileIndividualType extends AbstractType
         $this->shippingAddressClass = $shipping_address_class;
     }
     
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilder $builder, array $options)
     {
         $builder
             ->add('email', 'email', array(

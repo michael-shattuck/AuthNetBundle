@@ -3,7 +3,7 @@
 namespace Clamidity\AuthNetBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormBuilder;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\Form\CallbackValidator;
 use Symfony\Component\Form\FormInterface;
@@ -20,7 +20,7 @@ class PaymentProfileType extends AbstractType
         $this->shippingAddressClass = $shipping_address_class;
     }
 
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilder $builder, array $options)
     {
         $builder
             ->add('cardnumber', 'text', array(
