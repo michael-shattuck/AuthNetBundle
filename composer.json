@@ -1,0 +1,27 @@
+{
+    "name": "clamidity/authnet-bundle",
+    "type": "symfony-bundle",
+    "description": "Symfony ClamidityAuthNetBundle",
+    "keywords": ["Authorize.net"],
+    "homepage": "http://github.com/clamidity/AuthNetBundle",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Michael Shattuck",
+            "email": "ms2474@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "php": ">=5.3.2",
+        "symfony/framework-bundle": ">=2.1,<2.3-dev"
+    },
+    "require-dev": {
+        "doctrine/doctrine-bundle": "*",
+        "symfony/yaml": "2.1.*"
+    },
+    "autoload": {
+        "psr-0": { "Clamidity\\AuthNetBundle": "" }
+    },
+    "target-dir": "Clamidity/AuthNetBundle"
+}
